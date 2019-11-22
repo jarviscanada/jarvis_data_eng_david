@@ -12,6 +12,6 @@ Uses docker to setup psql server
 Contains create_table definitions for host_info and host_usage tables
 ###### 5) ./sql/queries.sql ######
 Contains queries to return analysis of tables. Queries include:
-	1) Grouping hosts by hardware information
-	2) Printing the average memory use of all hosts
-	3) Detects whether node failure occurs in any of the hosts
+	1. Grouping hosts by hardware information
+	2. Printing the average memory use of all hosts
+	3. Detects whether node failure occurs in any of the hosts
