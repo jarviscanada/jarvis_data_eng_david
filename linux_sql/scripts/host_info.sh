@@ -11,7 +11,7 @@ psql_password=$5	#generally D1n034uR
 #validate arguments
 if [ "$#" -ne 5 ]; then
     \echo "WARNING: You have $# arguments, must input 5 arugments" >&2
-	exit 1
+	\exit 1
 fi
 
 #check if arguments given are valid
@@ -19,7 +19,7 @@ fi
 if ! \psql -h $psql_host -p $psql_port -U $psql_user -d $db_name -c "\q"  2>/dev/null; then
 	\echo "WARNING: Connection to psql via user ${psql_user}, hosted on ${psql_host} to "\
 		"database: ${db_name} has failed. Please re-enter arguments"
-	exit 1
+	\exit 1
 else
 	\echo "Successfully connected to database ${db_name}"
 fi
@@ -41,7 +41,7 @@ timestamp_hw=$(\echo "$vm_t" | \awk 'END {print $(NF-1), $NF}')
 
 
 # PSQL command to be run in psql
-insert_string=`echo "INSERT INTO PUBLIC.host_info("\
+insert_string=`\echo "INSERT INTO PUBLIC.host_info("\
 	"id, hostname, cpu_number, cpu_architecture,"\
 	"cpu_model, cpu_mhz, L2_cache, timestamp"\
 	")"\
@@ -54,9 +54,9 @@ insert_string=`echo "INSERT INTO PUBLIC.host_info("\
 
 # insert value, return error if DDL constraints not met
 if ! \psql -h $psql_host -p $psql_port -U $psql_user -d $db_name -c "$insert_string" >/dev/null ; then
-	echo "WARNING: tuple could not be inserted into table" >&2
-	exit 1
+	\echo "WARNING: tuple could not be inserted into table" >&2
+	\exit 1
 fi
 
-echo "INSERT SUCCESS"
-exit 0
+\echo "INSERT SUCCESS"
+\exit 0
