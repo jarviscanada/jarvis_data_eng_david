@@ -32,6 +32,10 @@ if [ ${mode,,} = 'start' ]; then
 	\export PGPASSWORD=${db_password}
 	\docker volume create pgdata
 	\docker run --rm --name jrvs-psql -e POSTGRES_PASSWORD=$PGPASSWORD -d -v pgdata:/var/lib/postgresql/data -p 5432:5432 postgres
+	# create database host_agent if not already exist
+	\psqil -h localhost -U postgres -tc "SELECT 1 FROM pg_database WHERE datname = 'host_agent'" | \grep -q 1 || \psql -h localhost -U postgres -c "CREATE DATABASE host_agent;"
+	\psql -h localhost -U postgres -d host_agent -f ./sql/ddl.sql   #run ddl scripts to create new  table
+	# -d <database name> to connect to database
 	#psql -h localhost -U postgres -W    #starts psql instance
 
 else # case stop
