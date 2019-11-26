@@ -16,7 +16,7 @@ fi
 
 #check if arguments given are valid
 export PGPASSWORD=$psql_password
-if ! psql -h $psql_host -p $psql_port -U $psql_user -d $db_name -c "q"  2>/dev/null; then
+if ! psql -h $psql_host -p $psql_port -U $psql_user -d $db_name -c "\q"  2>/dev/null; then
 	echo "WARNING: Connection to psql via user ${psql_user}, hosted on ${psql_host} to "\
 		"database: ${db_name} has failed. Please re-enter arguments"
 	exit 1
