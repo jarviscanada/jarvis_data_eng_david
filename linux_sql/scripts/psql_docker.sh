@@ -6,47 +6,38 @@ db_password=$2
 
 #validate arguments
 if [ "$#" -lt 1 ]; then
-    \echo "WARNING: Illegal number of parameters" >&2
-	\exit 1
+    echo "WARNING: Illegal number of parameters" >&2
+	exit 1
 elif [[ "${mode,,}" != 'start' && "${mode,,}" != 'stop' ]]; then
-	\echo "WARNING: First argument must be to 'start' or 'stop' psql_docker" >&2
-	\exit 1
+	echo "WARNING: First argument must be to 'start' or 'stop' psql_docker" >&2
+	exit 1
 elif [[ "${mode,,}" = 'start' && "$#" -ne 2 ]]; then
-	\echo "WARNING: Need to input password if starting psql_docker" >&2
-	\exit 1
+	echo "WARNING: Need to input password if starting psql_docker" >&2
+	exit 1
 fi
 
 #setup or stop psql docker service
 if [ ${mode,,} = 'start' ]; then
-	if \docker ps | \grep -q 'jrvs-psql'; then
-		\echo "WARNING: jrvs-psql is already running" >&2
-		\exit 1
+	if docker ps | grep -q 'jrvs-psql'; then
+		echo "WARNING: jrvs-psql is already running" >&2
+		exit 1
 	fi
-	\systemctl status docker 2>/dev/null || \systemctl start docker
-	\docker pull postgres
-	#if \grep -q 'PGPASSWORD' ~/.bashrc; then
-	#	\sed -i s/PGPASSWORD=.*/PGPASSWORD=${db_password}/g ~/.bashrc
-	#else
-	#	\echo "export PGPASSWORD=${db_password}" >> ~/.bashrc
-	#fi
-	\export PGPASSWORD=${db_password}
-	\docker volume create pgdata
-	\docker run --rm --name jrvs-psql -e POSTGRES_PASSWORD=$PGPASSWORD -d -v pgdata:/var/lib/postgresql/data -p 5432:5432 postgres
-	# create database host_agent if not already exist
-	\psqil -h localhost -U postgres -tc "SELECT 1 FROM pg_database WHERE datname = 'host_agent'" | \grep -q 1 || \psql -h localhost -U postgres -c "CREATE DATABASE host_agent;"
-	\psql -h localhost -U postgres -d host_agent -f ./sql/ddl.sql   #run ddl scripts to create new  table
-	# -d <database name> to connect to database
-	#psql -h localhost -U postgres -W    #starts psql instance
+	sudo systemctl status docker >/dev/null || sudo systemctl start docker
+	docker pull postgres
+	export PGPASSWORD=${db_password}
+	docker volume create pgdata
+	docker run --rm --name jrvs-psql -e POSTGRES_PASSWORD=$PGPASSWORD -d -v pgdata:/var/lib/postgresql/data -p 5432:5432 postgres
+	psql -h localhost -U postgres -d host_agent -f /home/centos/dev/jarvis_data_eng_David_Yang/linux_sql/sql/ddl.sql #run ddl scripts to create new  table
 
 else # case stop
-	if  ! \docker ps | \grep -q 'jrvs-psql'; then
-		\echo "WARNING: jrvs-psql is not running" >&2
-		\exit 1
+	if  ! docker ps | grep -q 'jrvs-psql'; then
+		echo "WARNING: jrvs-psql is not running" >&2
+		exit 1
 	fi
-	\docker stop jrvs-psql
-	\systemctl stop docker
+	docker stop jrvs-psql
+	sudo systemctl stop docker
 fi
 
-\exit 0
+exit 0
 
 

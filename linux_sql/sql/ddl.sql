@@ -1,3 +1,9 @@
+DROP DATABASE IF EXISTS host_agent;
+CREATE DATABASE host_agent;
+
+DROP TABLE PUBLIC.host_info IF EXISTS CASCADE;
+DROP TABLE PUBLIC.host_usage IF EXISTS CASCADE;
+
 CREATE TABLE IF NOT EXISTS PUBLIC.host_info (
 	id SERIAL NOT NULL, 
 	hostname VARCHAR(150) UNIQUE NOT NULL, 
@@ -6,6 +12,7 @@ CREATE TABLE IF NOT EXISTS PUBLIC.host_info (
 	cpu_model VARCHAR(150) NOT NULL, 
 	cpu_mhz NUMERIC(7, 3), 
 	L2_cache SMALLINT, 
+	total_mem INT,
 	timestamp TIMESTAMP, 
 				
 	/* Define Primary Key & Foreign Key constraints here */
