@@ -130,5 +130,12 @@ SET failed_times = EXTRACT(EPOCH FROM next_tstamp-timestamp)/60;
 ALTER TABLE node_fail
 DROP COLUMN next_tstamp;
 -- End of table block --
-
 ---------- END final question ----------
+
+
+SELECT * FROM cpu_num_by_mem_size; -- output sol to 1st q
+SELECT * FROM avg_mem_usage; -- output sol to 2nd q
+SELECT * FROM node_fail; -- output sol to 3rd q
+
+
+
