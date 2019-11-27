@@ -5,7 +5,7 @@ psql_host=$1 		#generally localhost
 psql_port=$2		#generally 5432
 db_name=$3			#generally host_agent
 psql_user=$4		#generally postgres
-psql_password=$5	#generally D1n034uR
+psql_password=$5	#insert password
 
 
 #validate arguments
