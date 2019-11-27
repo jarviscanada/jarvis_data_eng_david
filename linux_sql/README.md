@@ -27,14 +27,14 @@ Contains queries to return analysis of tables. Queries include:
 # 4) Script Usage #
 ./scripts/psql_docker.sh (*start|stop*) [*password|*] <br /> 
 ./scripts/host_info.sh *psql_host psql_port db_name psql_user psql_password* <br /> 
-	EXAMPLE: ./scripts/host_info.sh *localhost 4532 host_agent postgres password* <br /> 
+	EXAMPLE: `./scripts/host_info.sh *localhost 4532 host_agent postgres password*` <br /> 
 ./scripts/host_usage.sh *psql_host psql_port db_name psql_user psql_password* <br /> 
-	EXAMPLE: ./scripts/host_usage.sh *localhost 4532 host_agent postgres password* <br /> 
+	EXAMPLE: `./scripts/host_usage.sh *localhost 4532 host_agent postgres password*` <br /> 
 **To ensure that host_usage script runs every minute make use of crontab:** 
 1. Run `crontab -e` in terminal
 2. input command `* * * * * bash <full_path to host_usage.sh>  *psql_host psql_port db_name psql_user psql_password* > /tmp/host_usage.log` in terminal <br /> 
 	Example: <br />
-\* \* \* \* \* bash /home/centos/dev/jarvis_data_eng_David_Yang/linux_sql/scripts/host_usage.sh localhost 5432 host_agent postgres password > /tmp/host_usage.log  
+`* * * * * bash /home/centos/dev/jarvis_data_eng_David_Yang/linux_sql/scripts/host_usage.sh localhost 5432 host_agent postgres password > /tmp/host_usage.log` 
 
 # 5) Improvements #
 Things I think can be added to the project:
