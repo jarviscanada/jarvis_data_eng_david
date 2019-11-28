@@ -42,8 +42,19 @@ if [ ${mode,,} = 'start' ]; then
 	fi
 	sudo systemctl status docker > /dev/null 2>&1 || sudo systemctl start docker
 	export PGPASSWORD=${db_password}
-	docker pull postgres
-	docker volume create pgdata
+	if docker image ls | grep -q '^postgres'; then
+		echo "Postgres image found"
+	else
+		echo "WARNING: No postgres image found, pulling" >&2
+		docker pull postgres
+	fi
+
+	if docker volume ls -f name=pgdata | grep -q 'pgdata'; then
+		echo "docker volume pgdata already exists" >&2
+	else
+		docker volume create pgdata
+		echo "Creating volume pgdata" >&2
+	fi
 	docker run --name jrvs-psql -e POSTGRES_PASSWORD=$PGPASSWORD -d -v pgdata:/var/lib/postgresql/data -p 5432:5432 postgres
 	if ! verify_created; then
 		echo "WARNING: jrvs-psql could not be created" >&2
