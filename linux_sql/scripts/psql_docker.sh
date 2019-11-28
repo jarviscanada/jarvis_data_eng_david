@@ -41,14 +41,15 @@ if [ ${mode,,} = 'start' ]; then
 		exit 0
 	fi
 	sudo systemctl status docker > /dev/null 2>&1 || sudo systemctl start docker
-	docker pull postgres
 	export PGPASSWORD=${db_password}
+	docker pull postgres
 	docker volume create pgdata
-	docker run --rm --name jrvs-psql -e POSTGRES_PASSWORD=$PGPASSWORD -d -v pgdata:/var/lib/postgresql/data -p 5432:5432 postgres
+	docker run --name jrvs-psql -e POSTGRES_PASSWORD=$PGPASSWORD -d -v pgdata:/var/lib/postgresql/data -p 5432:5432 postgres
 	if ! verify_created; then
 		echo "WARNING: jrvs-psql could not be created" >&2
 		exit 1
 	fi
+	docker container start jrvs-psql
 	if  verify_running; then
 		psql -h localhost -U postgres -f /home/centos/dev/jarvis_data_eng_David_Yang/linux_sql/sql/ddl.sql #run ddl scripts to create new  table
 		echo "SUCCESSFULLY created database & tables"
