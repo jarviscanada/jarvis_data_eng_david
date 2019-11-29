@@ -50,7 +50,7 @@ ALTER TABLE test_t
 ADD COLUMN percent_mem_used INT;
 
 UPDATE test_t
-SET percent_mem_used = CAST(percent_mem_numeric AS INT);
+SET percent_mem_used = CAST(100 - percent_mem_numeric AS INT);
 --End of section to update table to obtain percent memory used --
 
 
