@@ -15,7 +15,9 @@ SELECT
   id as host_id, 
   total_mem 
 FROM 
-  PUBLIC.host_info;
+  PUBLIC.host_info
+ORDER BY 
+  cpu_number;
 ---------- END first question ----------
 
 
