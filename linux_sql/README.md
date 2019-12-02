@@ -30,10 +30,10 @@ To run ./scripts/psql_docker.sh: <br />
 ```[Usage] ./scripts/psql_docker.sh (start|stop) [password|]``` <br /> 
 To run ./scripts/host_info.sh: <br />
 ```[Usage] ./scripts/host_info.sh psql_host psql_port db_name psql_user psql_password``` <br /> 
-```[Example] ./scripts/host_info.sh localhost 4532 host_agent postgres password``` <br /> 
+```[Example] ./scripts/host_info.sh localhost 5432 host_agent postgres password``` <br /> 
 To run ./scripts/host_usage.sh: <br />
 ```[Usage] ./scripts/host_usage.sh psql_host psql_port db_name psql_user psql_password``` <br /> 
-```[Example]: `./scripts/host_usage.sh localhost 4532 host_agent postgres password``` <br /> 
+```[Example]: `./scripts/host_usage.sh localhost 5432 host_agent postgres password``` <br /> 
 **To ensure that host_usage script runs every minute make use of crontab:** 
 1. Run `crontab -e` in terminal
 2. input command ```* * * * * bash <full_path to host_usage.sh>  psql_host psql_port db_name psql_user psql_password > /tmp/host_usage.log``` in terminal <br /> 
