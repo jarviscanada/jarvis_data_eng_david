@@ -49,7 +49,7 @@ insert_string=`echo "INSERT INTO PUBLIC.host_usage(
 	);"`
 
 # insert value, return error if DDL constraints not met
-if ! psql -h $psql_host -p $psql_port -U $psql_user -d $db_name -c "$insert_string" >/dev/null ; then
+if ! psql -h $psql_host -p $psql_port -U $psql_user -d $db_name -c "$insert_string"; then
 	echo "WARNING: tuple could not be inserted into table" >&2
 	exit 1
 fi
