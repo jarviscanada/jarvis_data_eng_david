@@ -4,9 +4,7 @@
 mode=$1
 db_password=$2
 
-
 #define functions
-
 # return 0 if  jrvs-psql grepped, 1 if jrvs-psql not found
 verify_created() {
 	docker container ls -a -f name=jrvs-psql | grep -q 'jrvs-psql'
@@ -16,7 +14,6 @@ verify_created() {
 verify_running() {
 	docker ps -f name=jrvs-psql | grep -q 'jrvs-psql'
 }
-
 
 #validate arguments
 if [ "$#" -lt 1 ]; then
@@ -62,19 +59,16 @@ if [ ${mode,,} = 'start' ]; then
 	fi
 	docker container start jrvs-psql
 	if  verify_running; then
-		psql -h localhost -U postgres -f /home/centos/dev/jarvis_data_eng_David_Yang/linux_sql/sql/ddl.sql #run ddl scripts to create new  table
-		echo "SUCCESSFULLY created database & tables"
+		echo "SUCCESSFULLY started jrvs-psql container"
 	else
 		echo "WARNING: jrvs-psql instsance not running" >&2
 	fi
-
 else # case stop
 	if  ! verify_running; then
 		echo "WARNING: jrvs-psql is not running" >&2
 	else
 		docker container stop jrvs-psql
 	fi
-
 
 	docker container rm jrvs-psql 2>/dev/null
 	if  ! verify_created; then

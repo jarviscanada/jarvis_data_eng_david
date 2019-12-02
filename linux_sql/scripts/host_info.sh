@@ -7,7 +7,6 @@ db_name=$3			#generally host_agent
 psql_user=$4		#generally postgres
 psql_password=$5	#insert password
 
-
 #validate arguments
 if [ "$#" -ne 5 ]; then
     echo "WARNING: You have $# arguments, must input 5 arugments" >&2
@@ -24,7 +23,6 @@ else
 	echo "Successfully connected to database ${db_name}"
 fi
 
-
 ###### Define Variables to use below ######
 lscpu_out=`lscpu`
 vm_t=`vmstat -t --unit M`
@@ -40,8 +38,6 @@ l2_cache=$(echo "$lscpu_out" | egrep "^L2 cache:" | awk '{print $3}' | sed s/[^0
 total_mem=$(cat /proc/meminfo | grep "^MemTotal" | awk '{print $2}')
 timestamp_hw=$(echo "$vm_t" | awk 'END {print $(NF-1), $NF}')
 
-
-
 # PSQL command to be run in psql
 insert_string=`echo "INSERT INTO PUBLIC.host_info("\
 	"id, hostname, cpu_number, cpu_architecture,"\
@@ -55,7 +51,7 @@ insert_string=`echo "INSERT INTO PUBLIC.host_info("\
 	");"`
 
 # insert value, return error if DDL constraints not met
-if ! psql -h $psql_host -p $psql_port -U $psql_user -d $db_name -c "$insert_string" >/dev/null ; then
+if ! psql -h $psql_host -p $psql_port -U $psql_user -d $db_name -c "$insert_string"; then
 	echo "WARNING: tuple could not be inserted into table" >&2
 	exit 1
 fi

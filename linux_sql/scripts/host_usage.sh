@@ -23,9 +23,6 @@ else
 	echo "Successfully connected to database ${db_name}"
 fi
 
-
-
-
 ###### Define Variables to use below ######
 vm_t=`vmstat -t --unit M`
 hostname=$(hostname -f)

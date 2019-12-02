@@ -7,7 +7,7 @@ host id by CPU number and sort by their memory size, average memory usage of eac
 are down.
 
 ## 2) Architecture and Design ##
-![my_architecture](./assets/linuxSqlArchitecture.jpg)
+![my_architecture](./assets/linuxSqlArchitecture.svg)
 
 ## 3) Explanation of files ##
 ###### 1) `./scripts/host_info.sh` ######
@@ -20,22 +20,25 @@ Uses docker to setup psql server
 Contains create_table definitions for host_info and host_usage tables
 ###### 5) `./sql/queries.sql` ######
 Contains queries to return analysis of tables. Queries include:
-	1. Grouping hosts by hardware information
-	2. Printing the average memory use of all hosts
-	3. Detects whether node failure occurs in any of the hosts
+	1. Grouping hosts by hardware information <br />
+	2. Printing the average memory use of all hosts <br />
+	3. Detects whether node failure occurs in any of the hosts <br />
 
 
 ## 4) Script Usage ##
-`./scripts/psql_docker.sh (start|stop) [password|]` <br /> 
-`./scripts/host_info.sh psql_host psql_port db_name psql_user psql_password` <br /> 
-	EXAMPLE: `./scripts/host_info.sh localhost 4532 host_agent postgres password` <br /> 
-`./scripts/host_usage.sh psql_host psql_port db_name psql_user psql_password` <br /> 
-	EXAMPLE: `./scripts/host_usage.sh localhost 4532 host_agent postgres password` <br /> 
+To run ./scripts/psql_docker.sh: <br />
+```[Usage] ./scripts/psql_docker.sh (start|stop) [password|]``` <br /> 
+To run ./scripts/host_info.sh: <br />
+```[Usage] ./scripts/host_info.sh psql_host psql_port db_name psql_user psql_password``` <br /> 
+```[Example] ./scripts/host_info.sh localhost 4532 host_agent postgres password``` <br /> 
+To run ./scripts/host_usage.sh: <br />
+```[Usage] ./scripts/host_usage.sh psql_host psql_port db_name psql_user psql_password``` <br /> 
+```[Example]: `./scripts/host_usage.sh localhost 4532 host_agent postgres password``` <br /> 
 **To ensure that host_usage script runs every minute make use of crontab:** 
 1. Run `crontab -e` in terminal
-2. input command `* * * * * bash <full_path to host_usage.sh>  psql_host psql_port db_name psql_user psql_password > /tmp/host_usage.log` in terminal <br /> 
+2. input command ```* * * * * bash <full_path to host_usage.sh>  psql_host psql_port db_name psql_user psql_password > /tmp/host_usage.log``` in terminal <br /> 
 	Example: <br />
-`* * * * * bash /home/centos/dev/jarvis_data_eng_David_Yang/linux_sql/scripts/host_usage.sh localhost 5432 host_agent postgres password > /tmp/host_usage.log` 
+```* * * * * bash /home/centos/dev/jarvis_data_eng_David_Yang/linux_sql/scripts/host_usage.sh localhost 5432 host_agent postgres password > /tmp/host_usage.log``` 
 
 ## 5) Improvements ##
 Things I think can be added to the project:
