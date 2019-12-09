@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -18,13 +19,17 @@ public class javaGrepImp implements javaGrep {
   private String outFile;
 
   @Override
-  public List<File> listFiles(String rootDir) {
+  public List<File> listFiles(String rootDir) throws IOException {
     List<File> allFiles = new ArrayList<File>();
-    for (File fileName : new File(rootDir).listFiles()) {
-      if (fileName.isDirectory()) {
-        allFiles.addAll(listFiles(fileName.getAbsolutePath()));
-      } else {
-        allFiles.add(fileName);
+    if (new File(rootDir).isFile()) {
+      allFiles.add(new File(rootDir));
+    } else {
+      for (File fileName : new File(rootDir).listFiles()) {
+        if (fileName.isDirectory()) {
+          allFiles.addAll(listFiles(fileName.getAbsolutePath()));
+        } else {
+          allFiles.add(fileName);
+        }
       }
     }
     return allFiles;
@@ -68,9 +73,9 @@ public class javaGrepImp implements javaGrep {
       i.printStackTrace();
     } finally {
       try {
-				if (bw != null) {
-					bw.close();
-				}
+        if (bw != null) {
+          bw.close();
+        }
       } catch (Exception ex) {
         System.out.println("Error in closing the BufferedWriter" + ex);
       }
