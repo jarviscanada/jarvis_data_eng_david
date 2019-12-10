@@ -57,7 +57,7 @@ public class javaGrepImp implements javaGrep {
   public boolean containsPattern(String line) {
     Pattern pattern = Pattern.compile(this.regex);
     Matcher matcher = pattern.matcher(line);
-    return matcher.matches();
+    return matcher.find();
   }
 
   @Override
