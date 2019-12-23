@@ -4,13 +4,11 @@ import com.google.gdata.util.common.base.PercentEscaper;
 import java.io.IOException;
 import java.net.URI;
 import java.sql.Timestamp;
-import java.util.Date;
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;
 import oauth.signpost.exception.OAuthCommunicationException;
 import oauth.signpost.exception.OAuthExpectationFailedException;
 import oauth.signpost.exception.OAuthMessageSignerException;
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
@@ -56,6 +54,7 @@ public class TwitterHttpHelper implements HttpHelper {
 
   @Override
   public HttpResponse httpPost(URI uri) {
+    HttpResponse response = null;
     try {
       /*
       HttpPost request = new HttpPost(uri);
@@ -63,7 +62,7 @@ public class TwitterHttpHelper implements HttpHelper {
       consumer.sign(request); //add headers
       return  httpClient.execute(request);
        */
-      return httpIntermediate(true, uri);
+      response = httpIntermediate(true, uri);
     } catch (OAuthMessageSignerException e) {
       e.printStackTrace();
     } catch (OAuthExpectationFailedException e) {
@@ -75,7 +74,7 @@ public class TwitterHttpHelper implements HttpHelper {
     } catch (IOException e) {
       e.printStackTrace();
     }
-    return null;
+    return response;
   }
 
   @Override
@@ -113,9 +112,10 @@ public class TwitterHttpHelper implements HttpHelper {
     String status = "Testing Post: " + timestamp;
     PercentEscaper percentEscaper = new PercentEscaper("",false);
     URI uriGet = URI.create("https://api.twitter.com/1.1/statuses/show.json?id=1206530744622948353");
-    URI uriPost = URI.create("https://api.twitter.com/1.1/statuses/update.json?status="  + percentEscaper.escape(status));
-    System.out.println(EntityUtils.toString(thh.httpGet(uriGet).getEntity()));
-//    System.out.println(EntityUtils.toString(thh.httpPost(uriPost).getEntity()));
+//    URI uriPost = URI.create("https://api.twitter.com/1.1/statuses/update.json?status="  + percentEscaper.escape(status));
+    URI uriPost = URI.create("https://api.twitter.com/1.1/statuses/update.json?status=ThisIsSomeText");
+//    System.out.println(EntityUtils.toString(thh.httpGet(uriGet).getEntity()));
+    System.out.println(EntityUtils.toString(thh.httpPost(uriPost).getEntity()));
 
   }
 }
