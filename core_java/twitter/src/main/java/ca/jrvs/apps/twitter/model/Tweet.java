@@ -22,7 +22,7 @@ public class Tweet {
   @JsonProperty("created_at")
   private String created_at;
   @JsonProperty("id")
-  private long id;
+  private Long id;
   @JsonProperty("id_str")
   private String id_str;
   @JsonProperty("text")
@@ -32,20 +32,25 @@ public class Tweet {
   @JsonProperty("coordinates")
   private Coordinates coordinates;
   @JsonProperty("retweet_count")
-  private long retweet_count;
+  private Long retweet_count;
   @JsonProperty("favorite_count")
-  private long favorite_count;
+  private Long favorite_count;
   @JsonProperty("favorited")
-  private boolean favorited;
+  private Boolean favorited;
   @JsonProperty("retweeted")
-  private boolean retweeted;
+  private Boolean retweeted;
 
   public Tweet() {
+    this.id = null;
     this.created_at = null;
     this.id_str = null;
     this.text = null;
     this.entities = null;
     this.coordinates = null;
+    this.retweet_count = null;
+    this.favorite_count = null;
+    this.favorited = null;
+    this.retweeted = null;
   }
 
   public String getCreated_at() {
@@ -56,7 +61,7 @@ public class Tweet {
     this.created_at = created_at;
   }
 
-  public long getId() {
+  public Long getId() {
     return id;
   }
 
@@ -96,7 +101,7 @@ public class Tweet {
     this.coordinates = coordinates;
   }
 
-  public long getRetweet_count() {
+  public Long getRetweet_count() {
     return retweet_count;
   }
 
@@ -104,7 +109,7 @@ public class Tweet {
     this.retweet_count = retweet_count;
   }
 
-  public long getFavorite_count() {
+  public Long getFavorite_count() {
     return favorite_count;
   }
 
@@ -112,13 +117,13 @@ public class Tweet {
     this.favorite_count = favorite_count;
   }
 
-  public boolean getFavorited() { return favorited; }
+  public Boolean getFavorited() { return favorited; }
 
   public void setFavorited(boolean favorited) {
     this.favorited = favorited;
   }
 
-  public boolean getRetweeted() {
+  public Boolean getRetweeted() {
     return retweeted;
   }
 

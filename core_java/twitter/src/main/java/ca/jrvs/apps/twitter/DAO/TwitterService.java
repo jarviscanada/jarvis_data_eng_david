@@ -53,7 +53,7 @@ public class TwitterService implements Service {
     try {
       longId = Long.parseLong(id);
     } catch (Exception i) {
-      throw new IllegalArgumentException("id param is invalid");
+      throw new IllegalArgumentException("Id: " + id + " param is invalid");
     }
     Tweet tweet = (Tweet) dao.findById(longId); //takes a while to run
     if (fields.length == 0 ) {

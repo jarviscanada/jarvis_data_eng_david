@@ -52,4 +52,14 @@ public class UserMention {
   public void setScreen_name(String screen_name) {
     this.screen_name = screen_name;
   }
+
+  @Override
+  public String toString() {
+    return "UserMention{" +
+        "id=" + id +
+        ", id_str='" + id_str + '\'' +
+        ", name='" + name + '\'' +
+        ", screen_name='" + screen_name + '\'' +
+        '}';
+  }
 }

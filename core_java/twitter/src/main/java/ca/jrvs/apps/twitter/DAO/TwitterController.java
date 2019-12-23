@@ -48,8 +48,8 @@ public class TwitterController implements Controller {
     if (args.length < 3) {
       throw new IllegalArgumentException("Need 2 or more arguments USAGE: SHOW <id> <fields>...");
     }
-    String id = args[0];
-    String[] fields = Arrays.copyOfRange(args, 1, args.length);
+    String id = args[1];
+    String[] fields = Arrays.copyOfRange(args, 2, args.length);
     return service.showTweet(id,fields);
   }
 
@@ -58,6 +58,7 @@ public class TwitterController implements Controller {
     if (args.length <= 1) {
       throw new IllegalArgumentException("Need to delete at least 1 tweet id USAGE: DELETE <id>...");
     }
-    return service.deleteTweets(args);
+    String[] ids = Arrays.copyOfRange(args, 1, args.length);
+    return service.deleteTweets(ids);
   }
 }
