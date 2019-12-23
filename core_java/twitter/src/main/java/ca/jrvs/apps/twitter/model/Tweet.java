@@ -40,6 +40,14 @@ public class Tweet {
   @JsonProperty("retweeted")
   private boolean retweeted;
 
+  public Tweet() {
+    this.created_at = null;
+    this.id_str = null;
+    this.text = null;
+    this.entities = null;
+    this.coordinates = null;
+  }
+
   public String getCreated_at() {
     return created_at;
   }
@@ -104,15 +112,13 @@ public class Tweet {
     this.favorite_count = favorite_count;
   }
 
-  public boolean isFavorited() {
-    return favorited;
-  }
+  public boolean getFavorited() { return favorited; }
 
   public void setFavorited(boolean favorited) {
     this.favorited = favorited;
   }
 
-  public boolean isRetweeted() {
+  public boolean getRetweeted() {
     return retweeted;
   }
 
