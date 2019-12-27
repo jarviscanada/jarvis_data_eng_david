@@ -15,6 +15,13 @@ public class Coordinates {
   @JsonProperty("point")
   private String point;
 
+  public Coordinates(float latitude, float longitude) {
+    this.point = new String("Point");
+    this.coordinates = new float[2];
+    this.coordinates[0] = latitude;
+    this.coordinates[1] = longitude;
+  }
+
   public float[] getCoordinates() {
     return coordinates;
   }
