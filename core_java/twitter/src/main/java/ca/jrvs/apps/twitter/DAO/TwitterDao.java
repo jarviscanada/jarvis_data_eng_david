@@ -1,5 +1,6 @@
 package ca.jrvs.apps.twitter.DAO;
 
+import ca.jrvs.apps.twitter.model.Coordinates;
 import ca.jrvs.apps.twitter.model.Tweet;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -79,8 +80,11 @@ public class TwitterDao implements CrdDao<Tweet, Long> {
   public Tweet create(Tweet entity) {
     //Post this tweet
     PercentEscaper percentEscaper = new PercentEscaper("", false);
+    Coordinates coordinates = entity.getCoordinates();
+    float lat = coordinates.getCoordinates()[0];
+    float lon = coordinates.getCoordinates()[1];
     URI uri = URI.create(API_BASE_URI + POST_PATH + QUERY_SYM + "status=" + percentEscaper
-              .escape(entity.getText()));
+              .escape(entity.getText()) + "&lat=" + lat + "&lon=" + lon);
     return httpResponseCheck(httpHelper.httpPost(uri));
   }
 
