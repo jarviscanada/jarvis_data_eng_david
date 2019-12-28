@@ -22,6 +22,7 @@ public class Coordinates {
     this.coordinates[0] = latitude;
     this.coordinates[1] = longitude;
   }
+  public Coordinates () { }
 
   public float[] getCoordinates() {
     return coordinates;
