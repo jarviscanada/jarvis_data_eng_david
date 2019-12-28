@@ -49,7 +49,7 @@ public class TwitterDao implements CrdDao<Tweet, Long> {
     return (T) m.readValue(json,clazz);
   }
 
-  public Tweet httpResponseCheck(HttpResponse response, Coordinates coordinates) {
+  public Tweet httpResponseCheck(HttpResponse response) {
     Tweet tweet = null;
     if (response == null) {
       throw new RuntimeException("Response is NULL");
@@ -70,9 +70,6 @@ public class TwitterDao implements CrdDao<Tweet, Long> {
     }
     try {
       tweet = toObjectFromJson(EntityUtils.toString(response.getEntity()),Tweet.class);
-      if (coordinates != null) {
-        tweet.setCoordinates(coordinates);
-      }
     } catch (IOException e) {
         e.printStackTrace();
     }
@@ -83,22 +80,24 @@ public class TwitterDao implements CrdDao<Tweet, Long> {
   public Tweet create(Tweet entity) {
     //Post this tweet
     PercentEscaper percentEscaper = new PercentEscaper("", false);
-    URI uri = URI.create(API_BASE_URI + POST_PATH + QUERY_SYM + "status=" + percentEscaper
-              .escape(entity.getText()));
     Coordinates coordinates = entity.getCoordinates();
-    return httpResponseCheck(httpHelper.httpPost(uri),coordinates);
+    float lat = coordinates.getCoordinates()[0];
+    float lon = coordinates.getCoordinates()[1];
+    URI uri = URI.create(API_BASE_URI + POST_PATH + QUERY_SYM + "status=" + percentEscaper
+              .escape(entity.getText()) + "&lat=" + lat + "&lon=" + lon);
+    return httpResponseCheck(httpHelper.httpPost(uri));
   }
 
   @Override
   public Tweet findById(Long aLong) {
     URI uri = URI.create(API_BASE_URI + SHOW_PATH + QUERY_SYM + "id=" + aLong);
-    return httpResponseCheck(httpHelper.httpGet(uri),null);
+    return httpResponseCheck(httpHelper.httpGet(uri));
   }
 
   @Override
   public Tweet deleteById(Long aLong) {
     URI uri = URI.create(API_BASE_URI + DELETE_PATH + aLong + ".json");
-    return httpResponseCheck(httpHelper.httpPost(uri), null);
+    return httpResponseCheck(httpHelper.httpPost(uri));
   }
 
   public static void main(String[] args) {
