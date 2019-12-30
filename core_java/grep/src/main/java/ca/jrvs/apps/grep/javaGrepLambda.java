@@ -1,6 +1,5 @@
 package ca.jrvs.apps.grep;
 
-import static java.util.regex.Pattern.compile;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,13 +7,12 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
-import java.util.regex.Pattern;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class javaGrepLambda extends javaGrepImp {
+  private static Logger logger = LoggerFactory.getLogger(javaGrepLambda.class);
 
   @Override
   public List<File> listFiles(String rootDir) {
@@ -25,7 +23,7 @@ public class javaGrepLambda extends javaGrepImp {
           .filter(x -> x.isFile())
           .collect(Collectors.toList());
     } catch (IOException e) {
-      e.printStackTrace();
+      javaGrepLambda.logger.error("listFiles IOException: " + e);
     }
     return returnList;
   }
@@ -36,7 +34,7 @@ public class javaGrepLambda extends javaGrepImp {
     try {
       listLines = Files.lines(inputFile.toPath()).collect(Collectors.toList());
     } catch (IOException e) {
-      e.printStackTrace();
+      javaGrepLambda.logger.error("readLines IOException: " + e);
     }
     return listLines;
   }
@@ -53,7 +51,7 @@ public class javaGrepLambda extends javaGrepImp {
     try {
       javaGrepLambda.process();
     } catch (Exception ex) {
-      ex.printStackTrace();
+      logger.error("Exception running process: " + ex);
     }
   }
 }
