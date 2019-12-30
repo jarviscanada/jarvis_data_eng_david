@@ -88,7 +88,6 @@ public class TwitterDaoUnitTest {
     Tweet testTweet = spyDao.findById(id);
     assertNotNull(testTweet);
     assertNotNull(testTweet.getText());
-    assertEquals(id,testTweet.getId());
   }
 
 
@@ -105,6 +104,5 @@ public class TwitterDaoUnitTest {
     Tweet testTweet = spyDao.deleteById(id);
     assertNotNull(testTweet);
     assertNotNull(testTweet.getText());
-    assertEquals(id,testTweet.getId());
   }
 }
