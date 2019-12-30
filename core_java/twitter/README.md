@@ -37,13 +37,13 @@ Arguments Possible:
 Posts tweet with given text, and assigned above coordinates.
 
 **Finding a Tweet**
-```SHOW <tweet_id> <tweet_field> [<tweet_field>...]
+```SHOW <tweet_id> <tweet_field> [<tweet_field>...]```
 Find a tweet of given <tweet_id>. Will filter the found tweet via the <tweet_field> given by user.
 It is mandatory for the user to give at least 1 <tweet_field> or an IllegalArgumentException will be thrown.
 
 
 **Deleting a Tweet**
-```DElETE <tweet_id> [<tweet_id>...]
+```DElETE <tweet_id> [<tweet_id>...]```
 Delete all given given <tweet_id>. At least 1 <tweet_id> must be given by user or an IllegalArgumentException 
 will be thrown.
 
