@@ -6,9 +6,9 @@ first uses a standard loop to travserse through the directories, while the other
 with using Intellij as a IDE, especially with regards to reading Source code.
 
 ## 2) Usage ##
-Format of arguments: <br />
-```<regex_pattern> <location of root directory> <file directory for grep output>```
-For example <br />
+**Format of arguments:** <br />
+```<regex_pattern> <location of root directory> <file directory for grep output>```<br />
+**Example of Usage:** <br />
 ```.*IllegalArgumentException.* ./grep/src ~/javaGrep.out```
 
 ## 3) Pseudocode ##
