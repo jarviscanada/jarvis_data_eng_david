@@ -28,22 +28,22 @@ form of JSON.
 To first clean and build the project, we run:
 ```mvn clean package```
 
-To run the application, open up Intellij IDE, and add arguments via 'Edit Configurations...' options.
+To run the application, open up Intellij IDE, and add arguments via 'Edit Configurations...' options. <br /> 
 Then run the application via TwitterCLIApp/TwitterCLIBean/TwitterCLIComponentScan
 
-Arguments Possible:
-**Writing a Tweet** 
-```POST <input text> <latitude>:<longitude>```
+Arguments Possible: <br /> 
+**Writing a Tweet:** <br /> 
+```POST <input text> <latitude>:<longitude>```<br /> 
 Posts tweet with given text, and assigned above coordinates.
 
-**Finding a Tweet**
-```SHOW <tweet_id> <tweet_field> [<tweet_field>...]```
+**Finding a Tweet:** <br /> 
+```SHOW <tweet_id> <tweet_field> [<tweet_field>...]```<br /> 
 Find a tweet of given <tweet_id>. Will filter the found tweet via the <tweet_field> given by user.
 It is mandatory for the user to give at least 1 <tweet_field> or an IllegalArgumentException will be thrown.
 
 
-**Deleting a Tweet**
-```DElETE <tweet_id> [<tweet_id>...]```
+**Deleting a Tweet:**<br /> 
+```DElETE <tweet_id> [<tweet_id>...]```<br /> 
 Delete all given given <tweet_id>. At least 1 <tweet_id> must be given by user or an IllegalArgumentException 
 will be thrown.
 
@@ -51,17 +51,17 @@ will be thrown.
 ## 4) Model ##
 Tweet Model is represented by Tweet class, which contains private variables with getters and setters to retrieve 
 and set the data. As this project involved a simplified Tweet Model, in this project we were concerned about the
-following fields:
-'created at'
-'id'
-'id_str'
-'text'
-'entities'
-'coordinates'
-'retweet_count'
-'favorite_count'
-'favorited'
-'retweeted'
+following fields:<br /> 
+'created at'<br /> 
+'id'<br /> 
+'id_str'<br /> 
+'text'<br /> 
+'entities'<br /> 
+'coordinates'<br /> 
+'retweet_count'<br /> 
+'favorite_count'<br /> 
+'favorited'<br /> 
+'retweeted'<br /> 
 
 Because 'entities' and 'Coordinates' cannot be represented by given Java wrapper classes. I created a separate Coordinates
 and Entities class to represent the data. Because Entities contained additional non-scalar data-types, Entities had to 
@@ -69,7 +69,7 @@ be defined by additional Hashtag and UserMention objects.
 
 
 ## 5) Improvements ##
-Things I think can be added to the project:
-1) Add more tweet fields to the Tweet Model.
-2) Use GET Requests to organize tweets of a user via screen_name
+Things I think can be added to the project:<br /> 
+1) Add more tweet fields to the Tweet Model.<br /> 
+2) Use GET Requests to organize tweets of a user via screen_name<br /> 
 3) Allow option to Retweet.
