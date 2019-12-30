@@ -1,9 +1,7 @@
 package ca.jrvs.apps.twitter.DAO;
 
-import com.google.gdata.util.common.base.PercentEscaper;
 import java.io.IOException;
 import java.net.URI;
-import java.sql.Timestamp;
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;
 import oauth.signpost.exception.OAuthCommunicationException;
@@ -17,6 +15,8 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 import org.springframework.stereotype.Component;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Component
 public class TwitterHttpHelper implements HttpHelper {
@@ -27,6 +27,7 @@ public class TwitterHttpHelper implements HttpHelper {
 
   private OAuthConsumer consumer;
   private HttpClient httpClient;
+  private static Logger logger = LoggerFactory.getLogger(TwitterHttpHelper.class);
 
   public TwitterHttpHelper(String consumerKey, String consumerSecret, String accessToken, String tokenSecret) {
     this.CONSUMER_KEY = consumerKey;
@@ -68,23 +69,17 @@ public class TwitterHttpHelper implements HttpHelper {
   public HttpResponse httpPost(URI uri) {
     HttpResponse response = null;
     try {
-      /*
-      HttpPost request = new HttpPost(uri);
-      httpClient = HttpClientBuilder.create().build();
-      consumer.sign(request); //add headers
-      return  httpClient.execute(request);
-       */
       response = httpIntermediate(true, uri);
     } catch (OAuthMessageSignerException e) {
-      e.printStackTrace();
+      TwitterHttpHelper.logger.error("POST OAuthMessageSigning exception: " + e);
     } catch (OAuthExpectationFailedException e) {
-      e.printStackTrace();
+      TwitterHttpHelper.logger.error("POST OAuthExpectation exception: " + e);
     } catch (OAuthCommunicationException e) {
-      e.printStackTrace();
+      TwitterHttpHelper.logger.error("POST OAuthCommunication exception: " + e);
     } catch (ClientProtocolException e) {
-      e.printStackTrace();
+      TwitterHttpHelper.logger.error("POST ClientProtocol exception: " + e);
     } catch (IOException e) {
-      e.printStackTrace();
+      TwitterHttpHelper.logger.error("POST IOException: " + e);
     }
     return response;
   }
@@ -92,42 +87,19 @@ public class TwitterHttpHelper implements HttpHelper {
   @Override
   public HttpResponse httpGet(URI uri) {
     try {
-      /*
-      httpClient = HttpClientBuilder.create().build();
-      consumer.sign(request); //add headers
-      return  httpClient.execute(request);
-      */
       return httpIntermediate(false, uri);
     } catch (OAuthMessageSignerException e) {
-      e.printStackTrace();
+      TwitterHttpHelper.logger.error("GET OAuthMessageSigning exception: " + e);
     } catch (OAuthExpectationFailedException e) {
-      e.printStackTrace();
+      TwitterHttpHelper.logger.error("GET OAuthExpectation exception: " + e);
     } catch (OAuthCommunicationException e) {
-      e.printStackTrace();
+      TwitterHttpHelper.logger.error("GET OAuthCommunication exception: " + e);
     } catch (ClientProtocolException e) {
-      e.printStackTrace();
+      TwitterHttpHelper.logger.error("GET ClientProtocol exception: " + e);
     } catch (IOException e) {
-      e.printStackTrace();
+      TwitterHttpHelper.logger.error("GET IOException: " + e);
     }
     return null;
   }
 
-  public static void main(String[] args) throws IOException {
-    String consumerKey = System.getenv("consumerKey");
-    String consumerSecret = System.getenv("consumerSecret");
-    String accessToken =  System.getenv("accessToken");
-    String tokenSecret = System.getenv("tokenSecret");
-
-    //testing HttpGet
-    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-    TwitterHttpHelper thh = new TwitterHttpHelper(consumerKey,consumerSecret,accessToken,tokenSecret);
-    String status = "Testing Post: " + timestamp;
-    PercentEscaper percentEscaper = new PercentEscaper("",false);
-    URI uriGet = URI.create("https://api.twitter.com/1.1/statuses/show.json?id=1206530744622948353");
-//    URI uriPost = URI.create("https://api.twitter.com/1.1/statuses/update.json?status="  + percentEscaper.escape(status));
-    URI uriPost = URI.create("https://api.twitter.com/1.1/statuses/update.json?status=ThisIsSomeText");
-//    System.out.println(EntityUtils.toString(thh.httpGet(uriGet).getEntity()));
-    System.out.println(EntityUtils.toString(thh.httpPost(uriPost).getEntity()));
-
-  }
 }

@@ -10,11 +10,14 @@ import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @org.springframework.stereotype.Service
 public class TwitterService implements Service {
 
   private CrdDao dao;
+  private static Logger logger = LoggerFactory.getLogger(TwitterDao.class);
 
   @Autowired
   public TwitterService(CrdDao dao) {
@@ -23,8 +26,6 @@ public class TwitterService implements Service {
 
   @Override
   public Tweet postTweet(Tweet tweet) {
-    //get Text
-    //get long/lat
     if (tweet == null) {
       throw new IllegalArgumentException("Value of Tweet is null");
     }
@@ -44,6 +45,7 @@ public class TwitterService implements Service {
     return (Tweet) dao.create(tweet);
   }
 
+  //Perform bound check for coordinates
   public boolean coordinateBound(float lon, float lat) {
     lon = Math.abs(lon);
     lat = Math.abs(lat);
@@ -85,9 +87,9 @@ public class TwitterService implements Service {
         try {
           setMethod.invoke(workTweet, getMeth.invoke(tweet));
         } catch (IllegalAccessException e) {
-          e.printStackTrace();
+          TwitterService.logger.error("IllegalAccess Invocation: " + e);
         } catch (InvocationTargetException e) {
-          e.printStackTrace();
+          TwitterService.logger.error("Invocation Target Exception: " + e);
         }
       } else {
         throw new IllegalArgumentException("field: " + field + " does not exist");
@@ -115,21 +117,5 @@ public class TwitterService implements Service {
       }
     }
     return delTweet;
-  }
-
-  public static void main(String[] s) {
-    String consumerKey = System.getenv("consumerKey");
-    String consumerSecret = System.getenv("consumerSecret");
-    String accessToken = System.getenv("accessToken");
-    String tokenSecret = System.getenv("tokenSecret");
-    HttpHelper hHelp = new TwitterHttpHelper(consumerKey, consumerSecret, accessToken, tokenSecret);
-    TwitterDao td = new TwitterDao(hHelp);
-    Service service = new TwitterService(td);
-    Long id = 1207176914974195712L;
-    String str_id = Long.toString(id);
-    String[] fields = {"created_at", "id", "id_str", "text", "entities", "coordinates",
-        "retweet_count", "favorite_count", "favorited", "retweeted"};
-
-    System.out.println(service.showTweet(str_id, fields));
   }
 }
