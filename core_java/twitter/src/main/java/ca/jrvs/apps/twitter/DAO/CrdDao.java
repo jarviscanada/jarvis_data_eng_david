@@ -1,4 +1,7 @@
-package ca.jrvs.apps.DAO;
+package ca.jrvs.apps.twitter.DAO;
+
+import java.io.IOException;
+import javax.print.URIException;
 
 public interface CrdDao<T, ID> {
 

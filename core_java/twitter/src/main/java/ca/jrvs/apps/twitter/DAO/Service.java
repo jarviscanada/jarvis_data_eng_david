@@ -1,4 +1,4 @@
-package ca.jrvs.apps.DAO;
+package ca.jrvs.apps.twitter.DAO;
 
 import ca.jrvs.apps.twitter.model.Tweet;
 import java.util.List;
