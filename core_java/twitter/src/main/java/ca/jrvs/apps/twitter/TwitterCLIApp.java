@@ -7,10 +7,14 @@ import ca.jrvs.apps.twitter.DAO.TwitterController;
 import ca.jrvs.apps.twitter.DAO.TwitterDao;
 import ca.jrvs.apps.twitter.DAO.TwitterHttpHelper;
 import ca.jrvs.apps.twitter.DAO.TwitterService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class TwitterCLIApp {
   private Controller controller;
 
+  @Autowired
   public TwitterCLIApp(Controller controller) {
     this.controller = controller;
   }

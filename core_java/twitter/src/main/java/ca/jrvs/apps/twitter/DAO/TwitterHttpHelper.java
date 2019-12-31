@@ -13,9 +13,12 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.util.EntityUtils;
+import org.springframework.stereotype.Component;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@Component
 public class TwitterHttpHelper implements HttpHelper {
   private static String CONSUMER_KEY;
   private static String CONSUMER_SECRET;
@@ -31,14 +34,24 @@ public class TwitterHttpHelper implements HttpHelper {
     this.CONSUMER_SECRET = consumerSecret;
     this.ACCESS_TOKEN = accessToken;
     this.TOKEN_SECRET = tokenSecret;
-  }
-
-  public HttpResponse httpIntermediate(boolean type, URI uri)
-      throws OAuthCommunicationException, OAuthExpectationFailedException, OAuthMessageSignerException, IOException {
     consumer = new CommonsHttpOAuthConsumer(CONSUMER_KEY,
         CONSUMER_SECRET);
     consumer.setTokenWithSecret(ACCESS_TOKEN,TOKEN_SECRET);
     httpClient = HttpClientBuilder.create().build();
+  }
+  public TwitterHttpHelper() {
+    this.CONSUMER_KEY = System.getenv("consumerKey");
+    this.CONSUMER_SECRET = System.getenv("consumerSecret");
+    this.ACCESS_TOKEN =  System.getenv("accessToken");
+    this.TOKEN_SECRET = System.getenv("tokenSecret");
+    consumer = new CommonsHttpOAuthConsumer(CONSUMER_KEY,
+        CONSUMER_SECRET);
+    consumer.setTokenWithSecret(ACCESS_TOKEN,TOKEN_SECRET);
+    httpClient = HttpClientBuilder.create().build();
+  }
+
+  public HttpResponse httpIntermediate(boolean type, URI uri)
+      throws OAuthCommunicationException, OAuthExpectationFailedException, OAuthMessageSignerException, IOException {
     if (type == true) {
       // httpPost
       HttpPost request = new HttpPost(uri);
