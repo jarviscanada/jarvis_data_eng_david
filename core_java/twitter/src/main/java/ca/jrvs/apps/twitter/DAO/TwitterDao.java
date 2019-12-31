@@ -92,7 +92,7 @@ public class TwitterDao implements CrdDao<Tweet, Long> {
       lat = coordinates.getCoordinates()[0];
       lon = coordinates.getCoordinates()[1];
       uri = URI.create(API_BASE_URI + POST_PATH + QUERY_SYM + "status=" + percentEscaper
-          .escape(entity.getText()) + "&lat=" + lat + "&lon=" + lon);
+          .escape(entity.getText()) + "&lat=" + lat + "&long=" + lon);
     } else {
       uri = URI.create(API_BASE_URI + POST_PATH + QUERY_SYM + "status=" + percentEscaper
           .escape(entity.getText()));
