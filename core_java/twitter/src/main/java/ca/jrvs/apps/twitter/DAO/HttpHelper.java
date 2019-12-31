@@ -1,4 +1,4 @@
-package ca.jrvs.apps.DAO;
+package ca.jrvs.apps.twitter.DAO;
 
 import java.net.URI;
 import org.apache.http.HttpResponse;
