@@ -84,7 +84,6 @@ public class TwitterControllerIntTest {
 
   @Test
   public void deleteTest() {
-    /*
     postTest();
     String str_id = Long.toString(this.workId);
     Tweet tweetA = this.createdTweet;
@@ -103,7 +102,6 @@ public class TwitterControllerIntTest {
 
     assertNotNull(output.get(0).getCoordinates());
     assertNotNull(output.get(1).getCoordinates());
-     */
   }
 
 }
