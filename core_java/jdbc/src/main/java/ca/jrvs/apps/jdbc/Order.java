@@ -11,7 +11,7 @@ public class Order implements DataTransferObject {
   private String customerFirstName;
   private String customerLastLane;
   private String customerEmail;
-  private long id; //order_id
+  private long id; 
   private Date creationDate;
   private BigDecimal totalDue;
   private String status;
