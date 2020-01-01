@@ -16,13 +16,21 @@ import org.slf4j.LoggerFactory;
 public class TwitterService implements Service {
 
   private CrdDao dao;
-  private static Logger logger = LoggerFactory.getLogger(TwitterDao.class);
+  private final Logger logger = LoggerFactory.getLogger(TwitterDao.class);
 
   @Autowired
   public TwitterService(CrdDao dao) {
     this.dao = dao;
   }
 
+  /**
+   * Validate and post a user input Tweet
+   *
+   * @param tweet tweet to be created
+   * @return created tweet
+   *
+   * @throws IllegalArgumentException if text exceed max number of allowed characters or lat/long out of range
+   */
   @Override
   public Tweet postTweet(Tweet tweet) {
     if (tweet == null) {
@@ -44,13 +52,22 @@ public class TwitterService implements Service {
     return (Tweet) dao.create(tweet);
   }
 
-  //Perform bound check for coordinates
   public boolean coordinateBound(float lon, float lat) {
     lon = Math.abs(lon);
     lat = Math.abs(lat);
     return (lon <= 180 && lat <= 90);
   }
 
+
+  /**
+   * Search a tweet by ID
+   *
+   * @param id tweet id
+   * @param fields set fields not in the list to null
+   * @return Tweet object which is returned by the Twitter API
+   *
+   * @throws IllegalArgumentException if id or fields param is invalid
+   */
   @Override
   public Tweet showTweet(String id, String[] fields) {
     long longId;
@@ -59,12 +76,12 @@ public class TwitterService implements Service {
     } catch (Exception i) {
       throw new IllegalArgumentException("Id: " + id + " param is invalid");
     }
-    Tweet tweet = (Tweet) dao.findById(longId); //takes a while to run
+    Tweet tweet = (Tweet) dao.findById(longId); 
     if (fields.length == 0 ) {
       return tweet;
     }
     Tweet workTweet = new Tweet();
-    Method[] methods = Tweet.class.getDeclaredMethods(); //all Tweet methods
+    Method[] methods = Tweet.class.getDeclaredMethods(); 
     Map<String,Method> methodNames = new HashMap<String,Method>();
 
     for (Method m : methods) {
@@ -80,15 +97,14 @@ public class TwitterService implements Service {
       String getter = "get" + template;
       String setter = "set" + template;
       if (methodNames.containsKey(getter) && methodNames.containsKey(setter)) {
-        //run setter
         Method setMethod = methodNames.get(setter);
         Method getMeth = methodNames.get(getter);
         try {
           setMethod.invoke(workTweet, getMeth.invoke(tweet));
         } catch (IllegalAccessException e) {
-          TwitterService.logger.error("IllegalAccess Invocation: " + e);
+          logger.error("IllegalAccess Invocation: " + e);
         } catch (InvocationTargetException e) {
-          TwitterService.logger.error("Invocation Target Exception: " + e);
+          logger.error("Invocation Target Exception: " + e);
         }
       } else {
         throw new IllegalArgumentException("field: " + field + " does not exist");
@@ -97,6 +113,14 @@ public class TwitterService implements Service {
     return workTweet;
   }
 
+  /**
+   * Delete Tweet(s) by id(s).
+   *
+   * @param ids tweet IDs which will be deleted
+   * @return A list of Tweets
+   *
+   * @throws IllegalArgumentException if one of the IDs is invalid.
+   */
   @Override
   public List<Tweet> deleteTweets(String[] ids) {
     List<Tweet> delTweet = new ArrayList<Tweet>();
