@@ -35,7 +35,6 @@ class OrderDAO extends DataAccessObject<Order> {
       statement.setLong(1, id);
       ResultSet rs = statement.executeQuery();
       while (rs.next()) {
-        // following should be run only once
         if (count == 0) {
           order.setCustomerFirstName(rs.getString(1));
           order.setCustomerLastLane(rs.getString(2));
