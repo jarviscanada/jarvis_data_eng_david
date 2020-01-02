@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="lambdaStream:jar" />
+    </artifacts-to-build>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="737583c9-3305-4de1-b3d4-5049b536fd3c" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="ProjectId" id="1UUA42gAejEImdMWI19t5FozCI9" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../grep" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.ide.settings.notifications" />
+  </component>
+  <component name="RunManager">
+    <configuration name="LambdaStreamExcImp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="ca.jrvs.apps.practice.LambdaStreamExcImp" />
+      <module name="lambdaStream" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ca.jrvs.apps.practice.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="ca.jrvs.apps.practice.LambdaStreamExcImp" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.LambdaStreamExcImp" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="737583c9-3305-4de1-b3d4-5049b536fd3c" name="Default Changelist" comment="" />
+      <created>1575400605146</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1575400605146</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="418" y="117" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1575498464986">
+      <screen x="0" y="24" width="1920" height="866" />
+    </state>
+    <state x="418" y="117" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.24.1920.866@0.24.1920.866" timestamp="1575498464986" />
+    <state x="692" y="245" width="537" height="432" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1575532228403">
+      <screen x="0" y="24" width="1920" height="866" />
+    </state>
+    <state x="692" y="245" width="537" height="432" key="#com.intellij.ide.util.TreeClassChooserDialog/0.24.1920.866@0.24.1920.866" timestamp="1575532228403" />
+    <state x="743" y="217" width="436" height="489" key="FileChooserDialogImpl" timestamp="1575573385365">
+      <screen x="0" y="24" width="1920" height="866" />
+    </state>
+    <state x="743" y="217" width="436" height="489" key="FileChooserDialogImpl/0.24.1920.866@0.24.1920.866" timestamp="1575573385365" />
+    <state width="1878" height="217" key="GridCell.Tab.0.bottom" timestamp="1575521960662">
+      <screen x="0" y="24" width="1920" height="866" />
+    </state>
+    <state width="1878" height="217" key="GridCell.Tab.0.bottom/0.24.1920.866@0.24.1920.866" timestamp="1575521960662" />
+    <state width="1878" height="217" key="GridCell.Tab.0.center" timestamp="1575521960654">
+      <screen x="0" y="24" width="1920" height="866" />
+    </state>
+    <state width="1878" height="217" key="GridCell.Tab.0.center/0.24.1920.866@0.24.1920.866" timestamp="1575521960654" />
+    <state width="1878" height="217" key="GridCell.Tab.0.left" timestamp="1575521960649">
+      <screen x="0" y="24" width="1920" height="866" />
+    </state>
+    <state width="1878" height="217" key="GridCell.Tab.0.left/0.24.1920.866@0.24.1920.866" timestamp="1575521960649" />
+    <state width="1878" height="217" key="GridCell.Tab.0.right" timestamp="1575521960661">
+      <screen x="0" y="24" width="1920" height="866" />
+    </state>
+    <state width="1878" height="217" key="GridCell.Tab.0.right/0.24.1920.866@0.24.1920.866" timestamp="1575521960661" />
+    <state x="449" y="94" width="1022" height="735" key="SettingsEditor" timestamp="1575532254308">
+      <screen x="0" y="24" width="1920" height="866" />
+    </state>
+    <state x="449" y="94" width="1022" height="735" key="SettingsEditor/0.24.1920.866@0.24.1920.866" timestamp="1575532254308" />
+    <state x="683" y="191" width="630" height="524" key="StructurePopup" timestamp="1575559437787">
+      <screen x="0" y="24" width="1920" height="866" />
+    </state>
+    <state x="683" y="191" width="630" height="524" key="StructurePopup/0.24.1920.866@0.24.1920.866" timestamp="1575559437787" />
+    <state x="626" y="287" key="com.intellij.ide.util.TipDialog" timestamp="1575559264020">
+      <screen x="0" y="24" width="1920" height="866" />
+    </state>
+    <state x="626" y="287" key="com.intellij.ide.util.TipDialog/0.24.1920.866@0.24.1920.866" timestamp="1575559264020" />
+    <state x="287" y="72" width="1347" height="779" key="new project wizard" timestamp="1575512479135">
+      <screen x="0" y="24" width="1920" height="866" />
+    </state>
+    <state x="287" y="72" width="1347" height="779" key="new project wizard/0.24.1920.866@0.24.1920.866" timestamp="1575512479135" />
+    <state x="623" y="210" width="672" height="678" key="search.everywhere.popup" timestamp="1575536380844">
+      <screen x="0" y="24" width="1920" height="866" />
+    </state>
+    <state x="623" y="210" width="672" height="678" key="search.everywhere.popup/0.24.1920.866@0.24.1920.866" timestamp="1575536380844" />
+  </component>
+</project>

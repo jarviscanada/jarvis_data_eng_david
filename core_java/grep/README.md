@@ -5,7 +5,7 @@ that have a match with a user inputted regex, and write this information to a fi
 first uses a standard loop to travserse through the directories, while the other makes use of lambda streams. This project has also familiarized me
 with using Intellij as a IDE, especially with regards to reading Source code.
 
-# #Usage
+## Usage
 **Format of arguments:** <br />
 ```<regex_pattern> <location of root directory> <file directory for grep output>```<br />
 **Example of Usage:** <br />

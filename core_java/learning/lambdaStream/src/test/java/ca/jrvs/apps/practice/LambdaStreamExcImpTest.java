@@ -94,9 +94,6 @@ public class LambdaStreamExcImpTest {
 
   @Test
   public void consumerTest1() {
-    /*
-
-    // Not sure how to test Consumer<String>, stick to main function to test these
 
     LambdaStreamExc lse = new LambdaStreamExcImp();
 
@@ -105,8 +102,6 @@ public class LambdaStreamExcImpTest {
     Consumer<String> expect = x -> System.out.println("start> " + x + " <end");
     assertEquals("getLambdaPrinter implementation error", expect,
         lse.getLambdaPrinter("start", "end"));
-
-     */
 
     //test printMessages
   }

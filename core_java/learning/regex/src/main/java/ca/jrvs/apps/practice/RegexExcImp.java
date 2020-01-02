@@ -50,7 +50,6 @@ public class RegexExcImp implements RegexExc {
   }
 
   public static void main(String[] args) {
-    /*
     RegexExcImp rce = new RegexExcImp();
     String jpg = new String("abc.jpg");
     String jpeg = new String("abc.jpeg");
@@ -95,7 +94,6 @@ public class RegexExcImp implements RegexExc {
     } else {
       System.out.print("nonEmpty line regex error");
     }
-     */
   }
 
 

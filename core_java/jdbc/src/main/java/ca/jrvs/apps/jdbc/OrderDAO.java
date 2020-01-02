@@ -9,6 +9,7 @@ import java.util.List;
 import ca.jrvs.apps.jdbc.util.DataAccessObject;
 
 class OrderDAO extends DataAccessObject<Order> {
+
   private static final String getOrderById = "SELECT\n"
       + "  c.first_name, c.last_name, c.email, o.order_id,\n"
       + "  o.creation_date, o.total_due, o.status,\n"
@@ -50,16 +51,16 @@ class OrderDAO extends DataAccessObject<Order> {
           order.setSalespersonEmail(rs.getString(10));
           count++;
         }
-				orderDetails od = new orderDetails();
-				od.setOrderItemQuantity(rs.getLong(11));
-				od.setProductCode(rs.getString(12));
-				od.setProductName(rs.getString(13));
-				od.setProductSize(rs.getLong(14));
-				od.setProductVariety(rs.getString(15));
-				od.setProductPrice(rs.getBigDecimal(16));
-				orderList.add(od);
+        orderDetails od = new orderDetails();
+        od.setOrderItemQuantity(rs.getLong(11));
+        od.setProductCode(rs.getString(12));
+        od.setProductName(rs.getString(13));
+        od.setProductSize(rs.getLong(14));
+        od.setProductVariety(rs.getString(15));
+        od.setProductPrice(rs.getBigDecimal(16));
+        orderList.add(od);
       }
-    } catch (SQLException se){
+    } catch (SQLException se) {
       se.printStackTrace();
       throw new RuntimeException(se);
     }

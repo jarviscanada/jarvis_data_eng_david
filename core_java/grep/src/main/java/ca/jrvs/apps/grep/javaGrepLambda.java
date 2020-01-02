@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class javaGrepLambda extends javaGrepImp {
+
   private final Logger logger = LoggerFactory.getLogger(javaGrepLambda.class);
 
   @Override
@@ -19,7 +20,7 @@ public class javaGrepLambda extends javaGrepImp {
     List<File> returnList = new ArrayList<File>();
     try {
       returnList = Files.walk(Paths.get(rootDir))
-          .map(x-> x.toFile())
+          .map(x -> x.toFile())
           .filter(x -> x.isFile())
           .collect(Collectors.toList());
     } catch (IOException e) {
@@ -51,7 +52,7 @@ public class javaGrepLambda extends javaGrepImp {
     try {
       javaGrepLambda.process();
     } catch (Exception ex) {
-			throw new RuntimeException("javaGrepLamba failed to run");
+      throw new RuntimeException("javaGrepLamba failed to run");
     }
   }
 }

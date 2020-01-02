@@ -106,19 +106,15 @@ public class LambdaStreamExcImp implements LambdaStreamExc {
     lse.flatMapInt(ss).forEach(x -> System.out.println(x));
 
 
-    /*
     //Testing getLambdaPrinter
     LambdaStreamExc lse = new LambdaStreamExcImp();
     Consumer<String> printer =
     lse.getLambdaPrinter("start>", "<end");
     printer.accept("Message body");
-     */
-    /*
     //Testing of printMessages/printOdd
     LambdaStreamExc lse = new LambdaStreamExcImp();
     int[] messages = {1,2,5};
     lse.printOdd(IntStream.of(messages), lse.getLambdaPrinter("msg:", "!") );
-    */
   }
 
 }
