@@ -1,7 +1,7 @@
 # JDBC Project
 ## Introduction
 Project is to introduce how to use JDBC libraries. JDBC is a  fundamental java library that allows connection between a Java application 
-and a RDBMS - in this project's case PostgreSQL. In this project implement OrderDao by writing the findById` method
+and a RDBMS - in this project's case PostgreSQL. In this project implement OrderDao by writing the `findById` method
 
 ## ER Diagram
 ![my_architecture](./assets/jdbc.jpg)
