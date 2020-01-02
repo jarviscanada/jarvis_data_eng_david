@@ -27,8 +27,11 @@ public class TwitterHttpHelper implements HttpHelper {
 
   private OAuthConsumer consumer;
   private HttpClient httpClient;
-  private static Logger logger = LoggerFactory.getLogger(TwitterHttpHelper.class);
+  private final Logger logger = LoggerFactory.getLogger(TwitterHttpHelper.class);
 
+  /**
+   * Consturctor with keys to access TwitterAPI
+   */
   public TwitterHttpHelper(String consumerKey, String consumerSecret, String accessToken, String tokenSecret) {
     this.CONSUMER_KEY = consumerKey;
     this.CONSUMER_SECRET = consumerSecret;
@@ -39,6 +42,10 @@ public class TwitterHttpHelper implements HttpHelper {
     consumer.setTokenWithSecret(ACCESS_TOKEN,TOKEN_SECRET);
     httpClient = HttpClientBuilder.create().build();
   }
+
+  /**
+   * Consturctor no args provided for SpringBoot
+   */
   public TwitterHttpHelper() {
     this.CONSUMER_KEY = System.getenv("consumerKey");
     this.CONSUMER_SECRET = System.getenv("consumerSecret");
@@ -50,54 +57,67 @@ public class TwitterHttpHelper implements HttpHelper {
     httpClient = HttpClientBuilder.create().build();
   }
 
+  /**
+   * Helps HTTP execute request
+   * @param boolean,uri
+   * @return
+   */
   public HttpResponse httpIntermediate(boolean type, URI uri)
       throws OAuthCommunicationException, OAuthExpectationFailedException, OAuthMessageSignerException, IOException {
     if (type == true) {
-      // httpPost
       HttpPost request = new HttpPost(uri);
-      consumer.sign(request); //add headers
+      consumer.sign(request); 
       return  httpClient.execute(request);
     } else {
-      //httpGet
       HttpGet request = new HttpGet(uri);
-      consumer.sign(request); //add headers
+      consumer.sign(request); 
       return  httpClient.execute(request);
     }
   }
 
+  /**
+   * Execute a HTTP Post call
+   * @param uri
+   * @return
+   */
   @Override
   public HttpResponse httpPost(URI uri) {
     HttpResponse response = null;
     try {
       response = httpIntermediate(true, uri);
     } catch (OAuthMessageSignerException e) {
-      TwitterHttpHelper.logger.error("POST OAuthMessageSigning exception: " + e);
+      logger.error("POST OAuthMessageSigning exception: " + e);
     } catch (OAuthExpectationFailedException e) {
-      TwitterHttpHelper.logger.error("POST OAuthExpectation exception: " + e);
+      logger.error("POST OAuthExpectation exception: " + e);
     } catch (OAuthCommunicationException e) {
-      TwitterHttpHelper.logger.error("POST OAuthCommunication exception: " + e);
+      logger.error("POST OAuthCommunication exception: " + e);
     } catch (ClientProtocolException e) {
-      TwitterHttpHelper.logger.error("POST ClientProtocol exception: " + e);
+      logger.error("POST ClientProtocol exception: " + e);
     } catch (IOException e) {
-      TwitterHttpHelper.logger.error("POST IOException: " + e);
+      logger.error("POST IOException: " + e);
     }
     return response;
   }
 
+  /**
+   * Execute a HTTP Get call
+   * @param uri
+   * @return
+   */
   @Override
   public HttpResponse httpGet(URI uri) {
     try {
       return httpIntermediate(false, uri);
     } catch (OAuthMessageSignerException e) {
-      TwitterHttpHelper.logger.error("GET OAuthMessageSigning exception: " + e);
+      logger.error("GET OAuthMessageSigning exception: " + e);
     } catch (OAuthExpectationFailedException e) {
-      TwitterHttpHelper.logger.error("GET OAuthExpectation exception: " + e);
+      logger.error("GET OAuthExpectation exception: " + e);
     } catch (OAuthCommunicationException e) {
-      TwitterHttpHelper.logger.error("GET OAuthCommunication exception: " + e);
+      logger.error("GET OAuthCommunication exception: " + e);
     } catch (ClientProtocolException e) {
-      TwitterHttpHelper.logger.error("GET ClientProtocol exception: " + e);
+      logger.error("GET ClientProtocol exception: " + e);
     } catch (IOException e) {
-      TwitterHttpHelper.logger.error("GET IOException: " + e);
+      logger.error("GET IOException: " + e);
     }
     return null;
   }
