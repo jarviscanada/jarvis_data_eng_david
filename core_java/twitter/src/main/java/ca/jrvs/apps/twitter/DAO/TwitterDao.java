@@ -25,12 +25,18 @@ public class TwitterDao implements CrdDao<Tweet, Long> {
   private static final String QUERY_SYM = "?";
   private static final int HTTP_OK = 200;
 
-
   private HttpHelper httpHelper;
 
   @Autowired
   public TwitterDao(HttpHelper httpHelper) {
     this.httpHelper = httpHelper;
+  }
+
+  /*
+   * Consturctor no args provided for SpringBoot
+   */
+  public TwitterDao() {
+    this.httpHelper = new TwitterHttpHelper();
   }
 
   public HttpHelper getHttpHelper() {

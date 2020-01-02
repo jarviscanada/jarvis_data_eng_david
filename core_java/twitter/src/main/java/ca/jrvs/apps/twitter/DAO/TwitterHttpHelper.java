@@ -13,12 +13,11 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.util.EntityUtils;
-import org.springframework.stereotype.Component;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 
-@Component
+@Repository
 public class TwitterHttpHelper implements HttpHelper {
   private static String CONSUMER_KEY;
   private static String CONSUMER_SECRET;
@@ -43,7 +42,7 @@ public class TwitterHttpHelper implements HttpHelper {
     httpClient = HttpClientBuilder.create().build();
   }
 
-  /**
+  /*
    * Consturctor no args provided for SpringBoot
    */
   public TwitterHttpHelper() {

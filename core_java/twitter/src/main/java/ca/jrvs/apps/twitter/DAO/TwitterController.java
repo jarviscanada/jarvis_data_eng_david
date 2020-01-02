@@ -17,6 +17,10 @@ public class TwitterController implements Controller {
     this.service = service;
   }
 
+  /*
+   * Consturctor no args provided for SpringBoot
+   */
+  public TwitterController() { this.service = new TwitterService(); }
 
   /**
    * Parse user argument and post a tweet by calling service classes

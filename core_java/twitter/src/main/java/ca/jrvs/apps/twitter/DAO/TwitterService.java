@@ -23,6 +23,13 @@ public class TwitterService implements Service {
     this.dao = dao;
   }
 
+  /*
+   * Consturctor no args provided for SpringBoot
+   */
+  public TwitterService() {
+    this.dao = new TwitterDao();
+  }
+
   /**
    * Validate and post a user input Tweet
    *
