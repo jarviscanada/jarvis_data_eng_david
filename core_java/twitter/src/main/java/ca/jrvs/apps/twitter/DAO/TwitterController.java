@@ -48,7 +48,7 @@ public class TwitterController implements Controller {
     try {
       lat = Float.valueOf(coordinates_str[0]);
       lon = Float.valueOf(coordinates_str[1]);
-    } catch (Exception e) {
+    } catch (Exception ex) {
       throw new IllegalArgumentException("Could not convert latitude:longitude values to float");
     }
 

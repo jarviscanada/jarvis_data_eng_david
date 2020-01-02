@@ -23,8 +23,8 @@ public class javaGrepLambda extends javaGrepImp {
           .map(x -> x.toFile())
           .filter(x -> x.isFile())
           .collect(Collectors.toList());
-    } catch (IOException e) {
-      logger.error("listFiles IOException: " + e);
+    } catch (IOException ex) {
+      logger.error("listFiles IOException: " + ex);
     }
     return returnList;
   }
@@ -34,8 +34,8 @@ public class javaGrepLambda extends javaGrepImp {
     List<String> listLines = new ArrayList<String>();
     try {
       listLines = Files.lines(inputFile.toPath()).collect(Collectors.toList());
-    } catch (IOException e) {
-      logger.error("readLines IOException: " + e);
+    } catch (IOException ex) {
+      logger.error("readLines IOException: " + ex);
     }
     return listLines;
   }

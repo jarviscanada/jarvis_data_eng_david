@@ -19,9 +19,9 @@ public class JDBCExecutor {
       Order order = orderDAO.findById(1000);
       System.out.println(order);
 
-    }catch(SQLException e){
-      e.printStackTrace();
-      throw new RuntimeException(e);
+    }catch(SQLException ex){
+      ex.printStackTrace();
+      throw new RuntimeException(ex);
     }
   }
 }

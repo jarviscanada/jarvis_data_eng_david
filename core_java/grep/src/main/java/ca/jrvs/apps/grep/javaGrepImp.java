@@ -45,10 +45,10 @@ public class javaGrepImp implements javaGrep {
         readSave.add(line);
         line = reader.readLine();
       }
-    } catch (IllegalArgumentException i) {
+    } catch (IllegalArgumentException ex) {
       System.out.println("Input could not be found");
-    } catch (IOException e) {
-      e.printStackTrace();
+    } catch (IOException ex) {
+      ex.printStackTrace();
     }
     return readSave;
   }
@@ -69,8 +69,8 @@ public class javaGrepImp implements javaGrep {
         bw.write("\n");
       }
       bw.close();
-    } catch (IOException i) {
-      i.printStackTrace();
+    } catch (IOException ex) {
+      ex.printStackTrace();
     } finally {
       try {
         if (bw != null) {

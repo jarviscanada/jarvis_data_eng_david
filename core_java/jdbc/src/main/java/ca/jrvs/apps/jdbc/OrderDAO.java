@@ -60,9 +60,9 @@ class OrderDAO extends DataAccessObject<Order> {
         od.setProductPrice(rs.getBigDecimal(16));
         orderList.add(od);
       }
-    } catch (SQLException se) {
-      se.printStackTrace();
-      throw new RuntimeException(se);
+    } catch (SQLException ex) {
+      ex.printStackTrace();
+      throw new RuntimeException(ex);
     }
     order.setOrderList(orderList);
     return order;

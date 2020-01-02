@@ -80,7 +80,7 @@ public class TwitterService implements Service {
     long longId;
     try {
       longId = Long.parseLong(id);
-    } catch (Exception i) {
+    } catch (Exception ex) {
       throw new IllegalArgumentException("Id: " + id + " param is invalid");
     }
     Tweet tweet = (Tweet) dao.findById(longId); 
@@ -108,10 +108,10 @@ public class TwitterService implements Service {
         Method getMeth = methodNames.get(getter);
         try {
           setMethod.invoke(workTweet, getMeth.invoke(tweet));
-        } catch (IllegalAccessException e) {
-          logger.error("IllegalAccess Invocation: " + e);
-        } catch (InvocationTargetException e) {
-          logger.error("Invocation Target Exception: " + e);
+        } catch (IllegalAccessException ex) {
+          logger.error("IllegalAccess Invocation: " + ex);
+        } catch (InvocationTargetException ex) {
+          logger.error("Invocation Target Exception: " + ex);
         }
       } else {
         throw new IllegalArgumentException("field: " + field + " does not exist");
@@ -136,13 +136,13 @@ public class TwitterService implements Service {
       long longId;
       try {
         longId = Long.parseLong(id);
-      } catch (Exception i) {
+      } catch (Exception ex) {
         throw new IllegalArgumentException("Id: " + id + " param is invalid");
       }
 
       try {
         delTweet.add((Tweet) dao.deleteById(longId));
-      } catch (Exception i) {
+      } catch (Exception ex) {
         throw new IllegalArgumentException("Id: " + longId + " could not be deleted");
       }
     }

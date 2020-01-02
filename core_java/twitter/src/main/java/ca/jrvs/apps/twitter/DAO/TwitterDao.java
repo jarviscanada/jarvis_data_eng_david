@@ -73,8 +73,8 @@ public class TwitterDao implements CrdDao<Tweet, Long> {
     if (response.getStatusLine().getStatusCode() != HTTP_OK) {
       try {
         logger.info(EntityUtils.toString(response.getEntity()));
-      } catch (IOException e) {
-        logger.error("IOException converting Entity to String: " + e);
+      } catch (IOException ex) {
+        logger.error("IOException converting Entity to String: " + ex);
       }
       throw new RuntimeException("HttpResponse not return HTTP_OK");
     }
@@ -84,8 +84,8 @@ public class TwitterDao implements CrdDao<Tweet, Long> {
     }
     try {
       tweet = toObjectFromJson(EntityUtils.toString(response.getEntity()),Tweet.class);
-    } catch (IOException e) {
-      logger.error("IOException converting Entity to JSON: " + e);
+    } catch (IOException ex) {
+      logger.error("IOException converting Entity to JSON: " + ex);
     }
     return tweet;
   }
