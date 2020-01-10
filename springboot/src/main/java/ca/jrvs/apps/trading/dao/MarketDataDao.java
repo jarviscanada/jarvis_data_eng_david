@@ -63,9 +63,9 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
 
     //check if httpResonse is valid
     int statusCode = httpResponse.getStatusLine().getStatusCode();
-    if (statusCode >= 300) {
-      logger.error("HTTP GET Response has error code: " + statusCode);
-      throw new DataRetrievalFailureException("HTTP GET Response has error code: " + statusCode);
+    if (statusCode != 200) {
+      logger.error("HTTP GET Response has issue code: " + statusCode);
+      throw new DataRetrievalFailureException("HTTP GET Response has issue code: " + statusCode);
     }
 
     try {
@@ -124,7 +124,6 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
     String tickCommaSeparate = String.join(",", tickers);
     String url = String.format(IEX_BATCH_URL, tickCommaSeparate);
 
-    //Json response string with batched IEX data
     String json = executeHttpGet(url).get();
     List<IexQuote> jsonList = null;
     try {
@@ -180,26 +179,5 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
   public <S extends IexQuote> Iterable<S> saveAll(Iterable<S> iterable) {
     throw new UnsupportedOperationException("Not Implemented");
   }
-
-  public static void main(String[] args) {
-    PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager();
-    cm.setMaxTotal(50);
-    cm.setDefaultMaxPerRoute(50);
-    MarketDataConfig marketDataConfig = new MarketDataConfig();
-    marketDataConfig.setHost("https://cloud.iexapis.com/v1/");
-    marketDataConfig.setToken(System.getenv("IEX_PUB_TOKEN"));
-
-    MarketDataDao mdd = new MarketDataDao(cm, marketDataConfig);
-
-    Optional<IexQuote> quoteList = mdd.findById("FB");
-    System.out.println(quoteList.get());
-
-    //List<IexQuote> quoteList = mdd.findAllById(Arrays.asList("AAPL", "FB"));
-//    for (IexQuote ie : quoteList) {
-    //     System.out.println(ie);
-    //  }
-
-  }
-
 
 }

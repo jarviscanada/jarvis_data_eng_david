@@ -26,6 +26,12 @@ public class QuoteController {
     this.quoteService = quoteService;
   }
 
+  /**
+   * Returns IexQuote corresponding to ticker
+   * @param ticker String
+   * @return IexQuote object
+   * @throws Exception throw with relation to HTTP status code
+   */
   //@ApiOperation(value = "Show iexQuote", notes = "Show iexQuote for a given ticker/symbol")
   //@ApiResponses(value = {@ApiResponse(code = 404, message = "ticker is not found")})
   @GetMapping(path = "/iex/ticker/{ticker}")
@@ -39,6 +45,12 @@ public class QuoteController {
     }
   }
 
+  /**
+   * Returns IexQuote List corresponding to ticker List
+   * @param tickers String List
+   * @return IexQuote object List
+   * @throws Exception throw with relation to HTTP status code
+   */
   @GetMapping(path = "/iex/tickers/")
   @ResponseStatus(HttpStatus.OK)
   @ResponseBody
