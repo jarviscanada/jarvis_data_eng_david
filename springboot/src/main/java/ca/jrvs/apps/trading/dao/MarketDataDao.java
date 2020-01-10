@@ -72,7 +72,7 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
       response = EntityUtils.toString(httpResponse.getEntity());
     } catch (IOException e) {
       logger.error("Error converting HttpResponse to String");
-      throw new DataRetrievalFailureException(
+      throw new IllegalArgumentException(
           "Conversion from HttpResponse to String failed: " + e);
     }
     return Optional.of(response);
