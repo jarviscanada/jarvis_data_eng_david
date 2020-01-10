@@ -5,12 +5,14 @@ public class MarketDataConfig {
   private String host;
   private String token;
 
-  public MarketDataConfig(String host) {
-    this.host = host;
-    this.token = System.getenv("IEX_PUB_TOKEN");
+  public MarketDataConfig() {
+    this.host = null;
+    this.token = null;
   }
 
-  public String getHost() { return host; }
+  public String getHost() {
+    return host;
+  }
 
   public void setHost(String host) {
     this.host = host;
