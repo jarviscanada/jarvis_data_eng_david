@@ -22,9 +22,6 @@ public class Application implements CommandLineRunner {
 
   private Logger logger = LoggerFactory.getLogger(Application.class);
 
-  //@Value("${app.init.dailyList}")
-  //private String[] initDailyList;
-
   @Autowired
   private QuoteService quoteService;
 
