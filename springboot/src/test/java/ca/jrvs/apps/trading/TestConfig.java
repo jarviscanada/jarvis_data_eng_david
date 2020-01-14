@@ -1,33 +1,17 @@
 package ca.jrvs.apps.trading;
 
-import ca.jrvs.apps.trading.dao.QuoteDao;
 import ca.jrvs.apps.trading.model.config.MarketDataConfig;
 import javax.sql.DataSource;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.http.conn.HttpClientConnectionManager;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class AppConfig {
-
-  private Logger logger = LoggerFactory.getLogger(AppConfig.class);
-
-  @Bean
-  public DataSource dataSource() {
-    String url = System.getenv("PSQL_URL");
-    String user = System.getenv("PSQL_USER");
-    String password = System.getenv("PSQL_PASSWORD");
-    //Never log your credentials/secrets. Use debugger instead
-    BasicDataSource basicDataSource = new BasicDataSource();
-    basicDataSource.setUrl(url);
-    basicDataSource.setUsername(user);
-    basicDataSource.setPassword(password);
-    return basicDataSource;
-  }
+@ComponentScan(basePackages = {"ca.jrvs.apps.trading.dao", "ca.jrvs.apps.trading.service"})
+public class TestConfig {
 
   @Bean
   public MarketDataConfig marketDataConfig() {
@@ -43,6 +27,20 @@ public class AppConfig {
     cm.setMaxTotal(50);
     cm.setDefaultMaxPerRoute(50);
     return cm;
+  }
+
+  @Bean
+  public DataSource dataSource() {
+    System.out.println("Creating apacheDataSource");
+    String url = System.getenv("TEST_PSQL_URL");
+    String user = System.getenv("PSQL_USER");
+    String password = System.getenv("PSQL_PASSWORD");
+    //Never log your credentials/secrets. Use debugger instead
+    BasicDataSource basicDataSource = new BasicDataSource();
+    basicDataSource.setUrl(url);
+    basicDataSource.setUsername(user);
+    basicDataSource.setPassword(password);
+    return basicDataSource;
   }
 
 }
