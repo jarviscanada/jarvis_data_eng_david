@@ -146,9 +146,8 @@ public class QuoteDao implements CrudRepository<Quote, String> {
   @Override
   public boolean existsById(String ticker) {
     String selectSql = "SELECT COUNT(*) FROM " + TABLE_NAME + " WHERE " + ID_COLUMN_NAME + "=?";
-    boolean exists = false;
     long count = jdbcTemplate.queryForObject(selectSql, new Object[]{ticker}, Long.class);
-    return (count > 0) ? true : false;
+    return count > 0;
   }
 
   /**
