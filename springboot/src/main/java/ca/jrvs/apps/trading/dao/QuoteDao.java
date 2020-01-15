@@ -37,6 +37,9 @@ public class QuoteDao implements CrudRepository<Quote, String> {
 
   @Override
   public <S extends Quote> S save(S quote) {
+    if (quote == null) {
+      throw new IllegalArgumentException("Cannot save null quote");
+    }
     if (existsById(quote.getTicker())) {
       int updatedRowNo = updateOne(quote);
       //should only update 1 entry, as ticker should be unique in query
@@ -66,6 +69,9 @@ public class QuoteDao implements CrudRepository<Quote, String> {
   private int updateOne(Quote quote) {
     String update_sql = "UPDATE quote SET last_price=?, bid_price=?, "
         + "bid_size=?, ask_price=?, ask_size=? WHERE ticker=?";
+    if (!existsById(quote.getTicker())) {
+      throw new IllegalArgumentException("Ticker not found:" + quote.getTicker());
+    }
     return jdbcTemplate.update(update_sql, makeUpdateValues(quote));
   }
 
@@ -111,6 +117,9 @@ public class QuoteDao implements CrudRepository<Quote, String> {
    */
   @Override
   public Optional<Quote> findById(String ticker) {
+    if (ticker == null) {
+      throw new IllegalArgumentException("Cannot find null ticker");
+    }
     Optional<Quote> findID = Optional.empty();
     String selectSql = "SELECT * FROM " + TABLE_NAME + " WHERE " + ID_COLUMN_NAME + "=?";
     //Advanced: handle read + update race condition
@@ -134,6 +143,11 @@ public class QuoteDao implements CrudRepository<Quote, String> {
     } catch (Exception e) {
       logger.debug("Can't find ticker: " + ticker, e);
     }
+
+    if (quote == null) {
+      logger.debug("Resource not found");
+      throw new RuntimeException("query search returning null");
+    }
     return Optional.of(quote);
   }
 
@@ -145,6 +159,9 @@ public class QuoteDao implements CrudRepository<Quote, String> {
    */
   @Override
   public boolean existsById(String ticker) {
+    if (ticker == null) {
+      throw new IllegalArgumentException("null ticker cannot exist");
+    }
     String selectSql = "SELECT COUNT(*) FROM " + TABLE_NAME + " WHERE " + ID_COLUMN_NAME + "=?";
     long count = jdbcTemplate.queryForObject(selectSql, new Object[]{ticker}, Long.class);
     return count > 0;
@@ -190,6 +207,9 @@ public class QuoteDao implements CrudRepository<Quote, String> {
    */
   @Override
   public void deleteById(String ticker) {
+    if (ticker == null) {
+      throw new IllegalArgumentException("Cannot delete null ticker value");
+    }
     String selectSql = "DELETE FROM " + TABLE_NAME + " WHERE " + ID_COLUMN_NAME + "=?";
     this.jdbcTemplate.update(selectSql, ticker);
   }
