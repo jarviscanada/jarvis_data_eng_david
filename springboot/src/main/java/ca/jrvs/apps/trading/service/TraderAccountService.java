@@ -105,7 +105,13 @@ public class TraderAccountService {
       }
       List<Position> positions = positionDao.findPosById(account.getId());
       if (positions != null) {
-        throw new IllegalArgumentException(account.getId() + " has position for account");
+        for (Position position : positions) {
+          if (position.getPosition() != 0) {
+            throw new IllegalArgumentException(
+                account.getId() + " still has: " + position.getPosition()
+                    + " securities remaining");
+          }
+        }
       }
     }
 
