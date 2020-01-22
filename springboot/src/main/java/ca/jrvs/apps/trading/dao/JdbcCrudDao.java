@@ -74,7 +74,9 @@ public abstract class JdbcCrudDao <T extends Entity<Integer>> implements CrudRep
   public Optional<T> findById(Integer id) {
     Optional<T> entity = Optional.empty();
     String selectSql = "SELECT * FROM " + getTableName() + " WHERE " + getIdColumnName() + " =?";
-
+    if (!existsById(id)) {
+      return entity;
+    }
     try {
       entity = Optional.ofNullable((T) getJdbcTemplate()
           .queryForObject(selectSql,
@@ -91,9 +93,6 @@ public abstract class JdbcCrudDao <T extends Entity<Integer>> implements CrudRep
 
   @Override
   public boolean existsById(Integer id) {
-    if (id == null) {
-      throw new IllegalArgumentException("Integer id is cannot exist");
-    }
     String selectSql = "SELECT COUNT(*) FROM " + getTableName() + " WHERE " + getIdColumnName() + " =?";
     long count = getJdbcTemplate().queryForObject(selectSql, new Object[]{id}, Long.class);
     return count > 0;
