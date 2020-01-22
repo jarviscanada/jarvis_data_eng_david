@@ -10,7 +10,6 @@ import ca.jrvs.apps.trading.model.Quote;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
-import sun.nio.ch.LinuxAsynchronousChannelProvider;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {TestConfig.class})
