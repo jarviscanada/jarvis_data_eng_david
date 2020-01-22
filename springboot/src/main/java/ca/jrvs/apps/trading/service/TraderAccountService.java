@@ -1,7 +1,5 @@
 package ca.jrvs.apps.trading.service;
 
-import static sun.awt.geom.Curve.round;
-
 import ca.jrvs.apps.trading.dao.*;
 import ca.jrvs.apps.trading.model.*;
 import java.lang.reflect.Field;
@@ -96,10 +94,9 @@ public class TraderAccountService {
    */
   public void deleteTraderById(Integer traderId) {
 
-    transactionSetup(traderId,0.0d);
+    transactionSetup(traderId, 0.0d);
 
     List<Account> returnedAccounts = accountDao.findById(traderId, true);
-    List<Position> allPositions = new ArrayList<Position>();
 
     for (Account account : returnedAccounts) {
       if (account.getAmount() > 0.0) {
@@ -113,7 +110,7 @@ public class TraderAccountService {
       }
     }
 
-    for(Account account: returnedAccounts) {
+    for (Account account : returnedAccounts) {
       securityOrderDao.deleteById(account.getId());
     }
     accountDao.deleteById(traderId, true);
@@ -131,11 +128,11 @@ public class TraderAccountService {
    *                                  equal to 0
    */
   public Account deposit(Integer traderId, Double fund) {
-    transactionSetup(traderId,fund);
+    transactionSetup(traderId, fund);
     List<Account> returnedAccounts = accountDao.findById(traderId, true);
     Account returnAccount = null;
-    for(Account account: returnedAccounts) {
-      String strAmount = df.format(account.getAmount()+fund);
+    for (Account account : returnedAccounts) {
+      String strAmount = df.format(account.getAmount() + fund);
       Double newAmount = Double.valueOf(strAmount);
       account.setAmount(newAmount);
       returnAccount = accountDao.save(account);
@@ -155,12 +152,12 @@ public class TraderAccountService {
    *                                  and insufficient fund
    */
   public Account withdraw(Integer traderId, Double fund) {
-    transactionSetup(traderId,fund);
+    transactionSetup(traderId, fund);
 
     List<Account> returnedAccounts = accountDao.findById(traderId, true);
     Account returnAccount = null;
-    for(Account account: returnedAccounts) {
-      String strAmount = df.format(account.getAmount()-fund);
+    for (Account account : returnedAccounts) {
+      String strAmount = df.format(account.getAmount() - fund);
       Double newAmount = Double.valueOf(strAmount);
       if (newAmount < -0.001) {
         throw new IllegalArgumentException("Cannot have negative balance: " + newAmount);
@@ -184,7 +181,8 @@ public class TraderAccountService {
     }
 
     if (fund <= -0.001) {
-      throw new IllegalArgumentException("Fund is: " + fund + ". Fund must be greater or equal to 0");
+      throw new IllegalArgumentException(
+          "Fund is: " + fund + ". Fund must be greater or equal to 0");
     }
   }
 }
