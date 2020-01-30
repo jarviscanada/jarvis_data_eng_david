@@ -5,9 +5,13 @@ public class MarketOrderDto {
   private String ticker;
   private Integer accountId;
 
-  public Integer getSize() {
-    return size;
+  public MarketOrderDto() {
+    this.size = null;
+    this.ticker = null;
+    this.accountId = null;
   }
+
+  public Integer getSize() { return size; }
 
   public void setSize(Integer size) {
     this.size = size;
