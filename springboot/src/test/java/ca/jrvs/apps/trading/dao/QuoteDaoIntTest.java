@@ -121,7 +121,7 @@ public class QuoteDaoIntTest {
     for (Quote q: allQuotes) {
       returnedNames.add(q.getId());
     }
-    assertEquals(3, allQuotes.size()); //assert 3 returned
+    assertEquals(3, quoteDao.count()); //assert 3 returned
     assertThat(names, containsInAnyOrder(returnedNames.toArray()));
   }
 
@@ -140,7 +140,7 @@ public class QuoteDaoIntTest {
     for (Quote q: allQuotes) {
       returnedNames.add(q.getId());
     }
-    assertEquals(2, allQuotes.size()); //assert 3 returned
+    assertEquals(2, quoteDao.count()); //assert 3 returned
     assertThat(names, containsInAnyOrder(returnedNames.toArray()));
   }
 

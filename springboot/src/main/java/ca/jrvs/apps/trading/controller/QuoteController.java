@@ -1,6 +1,7 @@
 package ca.jrvs.apps.trading.controller;
 
 import ca.jrvs.apps.trading.model.IexQuote;
+import ca.jrvs.apps.trading.model.Quote;
 import ca.jrvs.apps.trading.service.QuoteService;
 import ca.jrvs.apps.trading.util.ResponseExceptionUtil;
 import java.util.List;
@@ -9,7 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -32,9 +35,55 @@ public class QuoteController {
    */
   @PutMapping(path= "/iexMarketData")
   @ResponseStatus(HttpStatus.OK)
-  public void updateMarketData() {
+  @ResponseBody
+  public List<Quote> updateMarketData() {
     try {
-      quoteService.updateMarketData();
+      return quoteService.updateMarketData();
+    } catch (Exception e) {
+      throw ResponseExceptionUtil.getResponseStatusException(e);
+    }
+  }
+
+  /**
+   * Update a given quote in the quote table
+   *  - Manually update a quote in the quote table using IEX market data
+   */
+  @PutMapping(path= "/")
+  @ResponseStatus(HttpStatus.OK)
+  @ResponseBody
+  public Quote putQuote(@RequestBody Quote quote) {
+    try {
+      return quoteService.saveQuote(quote);
+    } catch (Exception e) {
+      throw ResponseExceptionUtil.getResponseStatusException(e);
+    }
+  }
+
+  /**
+   * Add a new ticker to the dailyList (quote table)
+   * - Add a new ticker/symbol to the quote table, so trader can trade this security
+   */
+  @PostMapping(path= "/tickerId/{tickerId}")
+  @ResponseStatus(HttpStatus.CREATED)
+  @ResponseBody
+  public Quote createQuote(@PathVariable String tickerId) {
+    try {
+      return quoteService.saveQuote(tickerId);
+    } catch (Exception e) {
+      throw ResponseExceptionUtil.getResponseStatusException(e);
+    }
+  }
+
+  /**
+   * Show the dailyList
+   *  - Shows dailyList for this trading system
+   */
+  @GetMapping(path= "/dailyList")
+  @ResponseStatus(HttpStatus.OK)
+  @ResponseBody
+  public List<Quote> getDailyList() {
+    try {
+      return quoteService.findAllQuotes();
     } catch (Exception e) {
       throw ResponseExceptionUtil.getResponseStatusException(e);
     }

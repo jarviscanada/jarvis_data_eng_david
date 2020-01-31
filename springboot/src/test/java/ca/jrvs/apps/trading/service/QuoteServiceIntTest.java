@@ -10,6 +10,7 @@ import ca.jrvs.apps.trading.dao.QuoteDao;
 import ca.jrvs.apps.trading.model.IexQuote;
 import ca.jrvs.apps.trading.model.Quote;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.junit.After;
 import org.junit.Before;
@@ -83,6 +84,27 @@ public class QuoteServiceIntTest {
     assertNotEquals(q1,newAAPL);
   }
 
+  @Test
+  public void saveQuotes() {
+    List<Quote> allQuotes = quoteService.saveQuotes(Arrays.asList("ACM","ADBE","RBS"));
+    assertEquals(6, quoteDao.count());
+    assertTrue(quoteDao.existsById("ACM"));
+    assertTrue(quoteDao.existsById("ADBE"));
+    assertTrue(quoteDao.existsById("RBS"));
+  }
+
+  @Test
+  public void saveQuote() {
+    Quote saveQuote = quoteService.saveQuote("BNS");
+    assertEquals(4,quoteDao.count());
+    assertTrue(quoteDao.existsById("BNS"));
+  }
+
+  @Test
+  public void findAllQuotes() {
+    List<Quote> allQuotes = quoteService.findAllQuotes();
+    assertEquals(3, quoteDao.count());
+  }
 
   @After
   public void deleteAll() {

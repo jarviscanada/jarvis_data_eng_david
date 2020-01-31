@@ -33,15 +33,57 @@ public class QuoteService {
    *  - foreach ticker get iexQuote
    *  - convert iexQuote to quote entity
    *  - persist quote to db
+   *
+   * @return saved quotes
    */
-  public void updateMarketData() {
+  public List<Quote> updateMarketData() {
     List<Quote> allQuotes = (List<Quote>) quoteDao.findAll();
+    List<Quote> savedQuotes = new ArrayList<Quote>();
     for (Quote quote : allQuotes) {
       IexQuote iexQuote = findIexQuoteByTicker(quote.getTicker());
       Quote updatedQuote = buildQuoteFromIexQuote(iexQuote);
-      quoteDao.save(updatedQuote);
+      savedQuotes.add(saveQuote(updatedQuote));
     }
+    return savedQuotes;
   }
+
+  /**
+   * Validate (against IEX) and save given tickers to quote table.
+   *
+   *  - Get iexQuote(s)
+   *  - convert each iexQuote to Quote entity
+   *  - persist the quote to db
+   * @param tickers a list of tickers/symbols
+   * @return IllegalArgumentException if ticker is not found from IEX
+   */
+  public List<Quote> saveQuotes(List<String> tickers) {
+    List<Quote> allQuotes = new ArrayList<Quote>();
+    for (String ticker: tickers) {
+      allQuotes.add(saveQuote(ticker));
+    }
+    return allQuotes;
+  }
+
+  /**
+   * Helper method
+   */
+  public Quote saveQuote(String ticker) {
+    IexQuote iexQuote = findIexQuoteByTicker(ticker);
+    Quote quote = buildQuoteFromIexQuote(iexQuote);
+    return saveQuote(quote);
+  }
+
+  /**
+   * Update a given quote to quote table without validation
+   * @param quote entity
+   */
+  public Quote saveQuote(Quote quote) { return quoteDao.save(quote); }
+
+  /**
+   * Find all quotes from the quote table
+   * @return a list of quotes
+   */
+  public List<Quote> findAllQuotes() { return (List<Quote>) quoteDao.findAll(); }
 
   /**
    * Helper method. Map an IexQuote to a Quote entity.
