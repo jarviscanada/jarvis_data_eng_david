@@ -9,10 +9,7 @@ import java.util.List;
 import java.util.Optional;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import org.springframework.data.repository.CrudRepository;
-import org.yaml.snakeyaml.error.Mark;
 
 public class MarketDataDaoIntTest {
 
