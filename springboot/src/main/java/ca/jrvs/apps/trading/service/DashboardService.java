@@ -59,12 +59,13 @@ public class DashboardService {
     Account account = findAccountByTraderId(traderId);
     positions = positionDao.findPosById(account.getId());
 
-    for(Position position : positions) {
-      String ticker = position.getTicker();
-      Quote quote = quoteDao.findById(ticker).get();
-      securityOrders.add(new SecurityRow(position,quote,ticker));
+    if (positions != null) {
+      for (Position position : positions) {
+        String ticker = position.getTicker();
+        Quote quote = quoteDao.findById(ticker).get();
+        securityOrders.add(new SecurityRow(position, quote, ticker));
+      }
     }
-
     return new PortfolioView(securityOrders);
   }
 

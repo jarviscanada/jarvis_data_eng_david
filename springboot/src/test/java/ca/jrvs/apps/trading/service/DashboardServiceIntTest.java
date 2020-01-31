@@ -6,6 +6,8 @@ import ca.jrvs.apps.trading.*;
 import ca.jrvs.apps.trading.dao.*;
 import ca.jrvs.apps.trading.model.*;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,7 +18,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes= {TestConfig.class})
+@SpringBootTest(classes = {TestConfig.class})
 @Sql({"classpath:schema.sql"})
 public class DashboardServiceIntTest {
 
@@ -81,20 +83,43 @@ public class DashboardServiceIntTest {
   public void getTraderAccountTest() {
     TraderAccountView traderAccountView = new TraderAccountView(trader, account);
     TraderAccountView returnedView = dashboardService.getTraderAccount(trader.getId());
-    assertEquals(traderAccountView,returnedView);
+    assertEquals(traderAccountView, returnedView);
   }
 
   @Test
   public void portfolioTest() {
-  Position testPosition = new Position();
+    Position testPosition = new Position();
     testPosition.setId(1);
     testPosition.setTicker("SHLDQ");
     testPosition.setPosition(3);
     PortfolioView returnedView = dashboardService.getProfileViewByTraderId(trader.getId());
     for (SecurityRow securityRow : returnedView.getSecurityRows()) {
-      assertEquals(securityRow.getPosition(),testPosition);
-      assertEquals(securityRow.getQuote(),fQuote);
+      assertEquals(securityRow.getPosition(), testPosition);
+      assertEquals(securityRow.getQuote(), fQuote);
     }
+  }
+
+  @Test
+  public void noSecurities() {
+    List<SecurityRow> securityRowis = new ArrayList<SecurityRow>();
+    PortfolioView desiredView = new PortfolioView(securityRowis);
+    Trader newTrader = new Trader();
+    newTrader.setId(2);
+    newTrader.setFirst_name("newFname");
+    newTrader.setLast_name("newLname");
+    newTrader.setCountry("NewLand");
+    newTrader.setDob(Date.valueOf("2020-01-20"));
+    newTrader.setEmail("newName@email.com");
+    traderDao.save(newTrader);
+
+    Account newAccount = new Account();
+    newAccount.setId(2);
+    newAccount.setTrader_id(2);
+    newAccount.setAmount(2.5d);
+    accountDao.save(newAccount);
+
+    PortfolioView portfolioView = dashboardService.getProfileViewByTraderId(newTrader.getId());
+    assertEquals(desiredView, portfolioView);
   }
 
   @After
