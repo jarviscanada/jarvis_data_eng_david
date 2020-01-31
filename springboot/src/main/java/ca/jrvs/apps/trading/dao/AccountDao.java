@@ -81,6 +81,26 @@ public class AccountDao extends JdbcCrudDao<Account> {
     return entity;
   }
 
+  public Optional<Account> findAccountByTraderId(Integer traderId) {
+    Optional<Account> entity = Optional.empty();
+    String selectSql = "SELECT * FROM " + getTableName() + " WHERE trader_id=?";
+    if (!existsById(traderId)) {
+      throw new IllegalArgumentException("traderId: " + traderId + " does not exist in database");
+    }
+    try {
+      entity = Optional.ofNullable((Account) getJdbcTemplate()
+          .queryForObject(selectSql,
+              BeanPropertyRowMapper.newInstance(getEntityClass()), traderId));
+    } catch (IncorrectResultSizeDataAccessException e) {
+      logger.debug("Can't find traderId: " + traderId, e);
+    }
+    if (entity == null) {
+      logger.debug("Resource not found");
+      throw new RuntimeException("query search returning null");
+    }
+    return entity;
+  }
+
 
   public void deleteById(Integer id, boolean isTraderId) {
     String IDCol = null;

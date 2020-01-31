@@ -1,16 +1,16 @@
 package ca.jrvs.apps.trading.dao;
 
 import ca.jrvs.apps.trading.model.Position;
-import java.util.ArrayList;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
@@ -48,18 +48,28 @@ public class PositionDao extends JdbcCrudDao<Position> {
   public Class<Position> getEntityClass() { return Position.class; }
 
 
-  public List<Position> findPosById(Integer id) {
+  public List<Position> findPosById(Integer accountId) {
     List<Position> entity = null;
     String selectSql = "SELECT * FROM " + getTableName() + " WHERE " + getIdColumnName() + " =?";
-    if (!existsById(id)) {
+    if (!existsById(accountId)) {
       return entity;
     }
     try {
+      //Maprow used since BeanPropertyRowManager not working properly here
       entity = (List<Position>) getJdbcTemplate()
           .query(selectSql,
-              BeanPropertyRowMapper.newInstance(getEntityClass()), id);
+              new Object[]{accountId},
+              new RowMapper<Position>() {
+                public Position mapRow(ResultSet rs, int rowNum) throws SQLException {
+                  Position innerPosition = new Position();
+                  innerPosition.setId(rs.getInt("account_id"));
+                  innerPosition.setTicker(rs.getString("ticker"));
+                  innerPosition.setPosition(rs.getInt("position"));
+                  return innerPosition;
+                }
+              });
     } catch (IncorrectResultSizeDataAccessException e) {
-      logger.debug("Can't find trader id: " + id, e);
+      logger.debug("Can't find trader id: " + accountId, e);
     }
     if (entity == null) {
       logger.debug("Resource not found");
