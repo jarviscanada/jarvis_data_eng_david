@@ -60,12 +60,14 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
       logger.error("GET request execution failed: " + e);
       throw new DataRetrievalFailureException("HTTP GET request failed");
     }
-
+    if (httpResponse == null) {
+      throw new IllegalArgumentException("Response returns null");
+    }
     //check if httpResonse is valid
     int statusCode = httpResponse.getStatusLine().getStatusCode();
     if (statusCode != 200) {
       logger.error("HTTP GET Response has issue code: " + statusCode);
-      throw new DataRetrievalFailureException("HTTP GET Response has issue code: " + statusCode);
+      throw new IllegalArgumentException("HTTP GET Response has issue code: " + statusCode);
     }
 
     try {
@@ -108,7 +110,7 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
     } else if (quotes.size() == 1) {
       iexQuote = Optional.of(quotes.get(0));
     } else {
-      throw new DataRetrievalFailureException("Unexpected number of quotes");
+      throw new IllegalArgumentException("Unexpected number of quotes");
     }
     return iexQuote;
   }
@@ -121,6 +123,8 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
    */
   @Override
   public List<IexQuote> findAllById(Iterable<String> tickers) {
+    int tickerNum = 0;
+    for (String tick :  tickers) { tickerNum++; }
     String tickCommaSeparate = String.join(",", tickers);
     String url = String.format(IEX_BATCH_URL, tickCommaSeparate);
 
@@ -131,7 +135,12 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
           .parseBatchJson(JsonUtil.generateJsonObject(json), IexQuote.class, "quote");
     } catch (IOException e) {
       logger.info("Error converting Json Object to Json String: " + e);
+      throw new IllegalArgumentException("One of arguments has been entered incorrectly");
     }
+    if (jsonList.size() != tickerNum) {
+      throw new IllegalArgumentException("One of arguments has been entered incorrectly");
+    }
+
     return jsonList;
   }
 

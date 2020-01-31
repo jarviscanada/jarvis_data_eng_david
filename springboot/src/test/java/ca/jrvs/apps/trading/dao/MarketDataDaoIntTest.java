@@ -24,7 +24,7 @@ public class MarketDataDaoIntTest {
     cm.setMaxTotal(50);
     cm.setDefaultMaxPerRoute(50);
     MarketDataConfig marketDataConfig = new MarketDataConfig();
-    marketDataConfig.setHost("http://cloud.iexapis.com/v1");
+    marketDataConfig.setHost("https://cloud.iexapis.com/v1");
     marketDataConfig.setToken(System.getenv("IEX_PUB_TOKEN"));
 
     dao = new MarketDataDao(cm, marketDataConfig);
