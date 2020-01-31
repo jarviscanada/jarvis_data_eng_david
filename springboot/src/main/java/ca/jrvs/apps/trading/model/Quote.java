@@ -1,6 +1,7 @@
 package ca.jrvs.apps.trading.model;
 
 import ca.jrvs.apps.trading.model.domain.Entity;
+import java.util.Objects;
 
 public class Quote implements Entity<String> {
 
@@ -84,5 +85,27 @@ public class Quote implements Entity<String> {
         ", askPrice=" + askPrice +
         ", askSize=" + askSize +
         '}';
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Quote quote = (Quote) o;
+    return Objects.equals(ticker, quote.ticker) &&
+        Objects.equals(lastPrice, quote.lastPrice) &&
+        Objects.equals(bidPrice, quote.bidPrice) &&
+        Objects.equals(bidSize, quote.bidSize) &&
+        Objects.equals(askPrice, quote.askPrice) &&
+        Objects.equals(askSize, quote.askSize);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(ticker, lastPrice, bidPrice, bidSize, askPrice, askSize);
   }
 }
