@@ -22,9 +22,6 @@ docker run --name trading-psql-demo-local \
 -d -p 5432:5432 jrvs/trading-psql-demo
 
 
-#Set IEX credential 
-set IEX_PUB_TOKEN="pk_d7bbe2f1840841f4883128797042a7bd"
-
 
 #start trading-app container which is attached to the trading-net docker network
 docker run -d --name trading-app-local \
