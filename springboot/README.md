@@ -1,11 +1,11 @@
 # SpringBoot Project
 
 ## Table of Contents
-[Introduction](## Introduction)
-[Quick Start](## Quick Start)
-[Architecture](## Architecture)
+[Introduction](# Introduction)
+[Quick Start](# Quick Start)
+[Architecture](# Architecture)
 
-## Introduction
+# Introduction
 This trading application is an online stock trading simulation REST API 
 that allows a trader to create a trading account. The trader can then use 
 this account to buy securities - data for this is retrieved via REST API.
@@ -15,7 +15,7 @@ between DAO, Service & Controller layers via MVC model. To retrieve
 IEX market data we use REST API, and then persist this data locally via
 Postgres.
 
-## Quick Start
+# Quick Start
 Prerequisites:
 1) Need Docker version 17.05 or higher. Check via `docker -v`<br />
 2) Centos 7<br />
@@ -42,8 +42,9 @@ created. In below example, I try to find TraderAccountView of
 a non-created Trader to display difference from above
 ![screenShot04](./assets/springbootPic04.JPG)
 
-## Architecture
-### Control Layer:
+# Architecture
+![Architecture](./assets/SpringBoot_Architecture-Page-1.svg)
+## Control Layer:
 Consists of:<br />
 1) DashboardController<br />
 2) OrderController<br />
@@ -51,7 +52,7 @@ Consists of:<br />
 4) TraderAccountController<br />
 Controllers handle user requests sent in via webservlet. 
 
-### Service Layer
+## Service Layer
 Consists of:<br />
 1) DashboardService<br />
 2) OrderService<br />
@@ -59,7 +60,7 @@ Consists of:<br />
 4) TraderAccountService<br />
 Service layer 
 
-### DAO layer
+## DAO layer
 Consists of:<br />
 1) AccountDao<br />
 2) JdbcCrudDao<br />
@@ -69,27 +70,27 @@ Consists of:<br />
 6) SecurityOrderDao<br />
 7) TraderDao<br />
 
-### SpringBoot: webservlet/TomCat and IoC
+## SpringBoot: webservlet/TomCat and IoC
 SpringBoot provides webservlet to 
 
-### PSQL and IEX
+## PSQL and IEX
 Postgres persists data retrieved from IEX Cloud via REST API. It 
 additionally stores other data needed by trading application.
 
-## REST API USAGE
+# REST API USAGE
 
-### Swagger
+## Swagger
 
-### Quote Controller
+## Quote Controller
 
-### Trader Controller
+## Trader Controller
 
-### Order Controller
+## Order Controller
 
-### Dashboard Controller 
+## Dashboard Controller 
 
 
-## Docker Deployment
+# Docker Deployment
 
-## Improvements
+# Improvements
 
