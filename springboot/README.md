@@ -2,7 +2,7 @@
 
 ## Table of Contents
 * [Introduction](#introduction)
-* [Quick Start](#quickStart)
+* [Quick-Start](#quick-start)
 * [Architecture](#architecture)
 * [REST API Usage](#restApiUsage)
 * [Docker Deployment](#dockerDeployment)
