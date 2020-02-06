@@ -2,7 +2,7 @@
 
 ## Table of Contents
 * [Introduction](#introduction)
-* [Quick Start](#quickstart)
+* [Quick Start](#quick start)
 * [Architecture](#architecture)
 
 ## Introduction
@@ -50,7 +50,10 @@ Consists of:<br />
 2) OrderController<br />
 3) QuoteController<br />
 4) TraderAccountController<br />
-Controllers handle user requests sent in via webservlet. 
+Controllers handle user requests inputted through API Endpoints.
+Mapping of each Endpoint API is defined here. Within each controller 
+method, typically executes Service layer - if fails will check for 
+what type of exception to throw.
 
 ### Service Layer
 Consists of:<br />
@@ -58,7 +61,9 @@ Consists of:<br />
 2) OrderService<br />
 3) QuoteService<br />
 4) TraderAccountService<br />
-Service layer 
+Service layer will typically parse inputs from Controller layer, and 
+throw IllegalArgumentExceptions if bad inputs are sent. Otherwise will 
+perform business logic on data returned from DAO layer.
 
 ### DAO layer
 Consists of:<br />
@@ -69,28 +74,56 @@ Consists of:<br />
 5) QuoteDao<br />
 6) SecurityOrderDao<br />
 7) TraderDao<br />
+Communicates directly with Postgres database with DataSource Object (Using JDBC 
+to connect). MarketDataDao communicates via REST API to IEX Cloud; other DAO's 
+are used to perform CRUD operations on Postgres database.
 
 ### SpringBoot: webservlet/TomCat and IoC
-SpringBoot provides webservlet to 
+SpringBoot uses IoC to provide dependency management to the trading application.
+Webservlet/Tomcat converts DTO data to JSON for data returning to user 
+and JSON data to object data for inputs to trading application.
 
 ### PSQL and IEX
 Postgres persists data retrieved from IEX Cloud via REST API. It 
-additionally stores other data needed by trading application.
+additionally stores other data needed by the trading application.
 
 ## REST API USAGE
-
 ### Swagger
+Swagger allows you to describe the structure of your APIs so that machines
+ can read them. Swagger supports reading JSON outputs of this application.
 
 ### Quote Controller
+ + `GET /quote/dailyList`
+   * Get a list of updated stocks available.
+ + `GET /quote/iex/ticker/{ticker}`
+ 	 * Get stock information according to IEX ticker.
+ + `GET /quote/iex/tickers/`
+ 	 * Input a list of IEX tickers to retrieve list of stock information 
+	 corresponding to each unique IEX ticker inputted.
+ + `POST /quote/tickerId/{tickerId}`
+   * Retrieve IEX ticker stock information and add it to available stocks.
+ + `PUT /quote/`
+   * Manually update stock quote information.
+ + `PUT /quote/iexMarketData`
+   * Automatically update information for all stocks available.
 
-### Trader Controller
+### TraderAccount Controller
+ * `DELETE /trader/traderId/{traderId}`
+ * `POST /trader`
+ * `POST /trader/firstname/{firstname}/lastname/{lastname}/dob/{dob}/country/
+ {country}/email/{email}`
+ * `PUT /trader/deposit/traderId/{traderId}/amount/{amount}`
+ * `PUT /trader/withdraw/traderId/{traderId}/amount/{amount}`
 
 ### Order Controller
+ * `POST /order/marketOrder`
 
 ### Dashboard Controller 
-
+ * `GET /dashboard/portfolio/traderId/{traderId}`
+ * `GET /dashboard/profile/traderId/{traderId}`
 
 ## Docker Deployment
+
 
 ## Improvements
 
