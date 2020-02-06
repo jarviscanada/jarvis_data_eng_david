@@ -2,7 +2,7 @@
 
 ## Table of Contents
 * [Introduction](#introduction)
-* [Quick Start](#quick Start)
+* [Quick Start](#quickstart)
 * [Architecture](#architecture)
 
 ## Introduction
