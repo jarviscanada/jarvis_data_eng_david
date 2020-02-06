@@ -5,6 +5,8 @@
 * [Quick Start](#quickStart)
 * [Architecture](#architecture)
 * [REST API Usage](#restApiUsage)
+* [Docker Deployment](#dockerDeployment)
+* [Improvements](#improvements)
 
 ## Introduction
 This trading application is an online stock trading simulation REST API 
@@ -113,8 +115,7 @@ Swagger allows you to describe the structure of your APIs so that machines
    * Delete a trader iff its account balance is 0.0, and has no stocks.
  + `POST /trader/`
    * Create a trader and an account via DTO on Swagger.
- + `POST /trader/firstname/{firstname}/lastname/{lastname}/dob/{dob}/country/
- {country}/email/{email}`
+ + `POST /trader/firstname/{firstname}/lastname/{lastname}/dob/{dob}/country/{country}/email/{email}`
    * Create a trader and an account via fields inputted in URL.
  + `PUT /trader/deposit/traderId/{traderId}/amount/{amount}`
    * Deposits inputted amount of money into a trader's account.
@@ -134,7 +135,16 @@ Swagger allows you to describe the structure of your APIs so that machines
    * Get Trader and Account information corresponding to traderId input.
 
 ## Docker Deployment
-
+![dockerize](./assets/dockerize.svg)
+PSQL initializes table by copying ddl sql script into initialization directory: 
+`/docker-entrypoint-initdb.d`. When we start the container with `docker run`, database: 
+jrvstrading` is created via -e docker run flag. The ddl.sql script in entrypoint 
+directory is then run creating the sql tables.
 
 ## Improvements
+1) Automate process of updating stock market rather than through endpoint.<br />
+2) Allow traders to have an option to make limit orders rather than just market orders.<br />
+3) Save stock information history, and allow traders to graph data to make better decisions.<br />
+4) <br />
+5) <br />
 
