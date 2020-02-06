@@ -145,6 +145,5 @@ directory is then run creating the sql tables.
 1) Automate process of updating stock market rather than through endpoint.<br />
 2) Allow traders to have an option to make limit orders rather than just market orders.<br />
 3) Save stock information history, and allow traders to graph data to make better decisions.<br />
-4) <br />
-5) <br />
-
+4) Restrict traders from viewing/deposit/withdraw/buy stock/sell stock from accounts not their own.<br />
+5) Have docker image available on docker hub.<br />
