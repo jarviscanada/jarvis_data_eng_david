@@ -1,9 +1,9 @@
 # SpringBoot Project
 
 ## Table of Contents
-[Introduction](# Introduction)
-[Quick Start](# Quick Start)
-[Architecture](# Architecture)
+* [Introduction](# Introduction)
+* [Quick Start](# Quick Start)
+* [Architecture](# Architecture)
 
 # Introduction
 This trading application is an online stock trading simulation REST API 
