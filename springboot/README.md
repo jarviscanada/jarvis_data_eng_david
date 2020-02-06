@@ -2,8 +2,9 @@
 
 ## Table of Contents
 * [Introduction](#introduction)
-* [Quick Start](#quick start)
+* [Quick Start](#quickStart)
 * [Architecture](#architecture)
+* [REST API Usage](#restApiUsage)
 
 ## Introduction
 This trading application is an online stock trading simulation REST API 
@@ -87,7 +88,7 @@ and JSON data to object data for inputs to trading application.
 Postgres persists data retrieved from IEX Cloud via REST API. It 
 additionally stores other data needed by the trading application.
 
-## REST API USAGE
+## REST API Usage
 ### Swagger
 Swagger allows you to describe the structure of your APIs so that machines
  can read them. Swagger supports reading JSON outputs of this application.
@@ -108,19 +109,29 @@ Swagger allows you to describe the structure of your APIs so that machines
    * Automatically update information for all stocks available.
 
 ### TraderAccount Controller
- * `DELETE /trader/traderId/{traderId}`
- * `POST /trader`
- * `POST /trader/firstname/{firstname}/lastname/{lastname}/dob/{dob}/country/
+ + `DELETE /trader/traderId/{traderId}`
+   * Delete a trader iff its account balance is 0.0, and has no stocks.
+ + `POST /trader/`
+   * Create a trader and an account via DTO on Swagger.
+ + `POST /trader/firstname/{firstname}/lastname/{lastname}/dob/{dob}/country/
  {country}/email/{email}`
- * `PUT /trader/deposit/traderId/{traderId}/amount/{amount}`
- * `PUT /trader/withdraw/traderId/{traderId}/amount/{amount}`
+   * Create a trader and an account via fields inputted in URL.
+ + `PUT /trader/deposit/traderId/{traderId}/amount/{amount}`
+   * Deposits inputted amount of money into a trader's account.
+ + `PUT /trader/withdraw/traderId/{traderId}/amount/{amount}`
+   * Withdraws inputted amount of money into a trader's account.
 
 ### Order Controller
- * `POST /order/marketOrder`
+ + `POST /order/marketOrder`
+   * Submits a marketOrder - Trader can buy or sell a certain amount of stock 
+	 according to the orderDTO inputted.
 
 ### Dashboard Controller 
- * `GET /dashboard/portfolio/traderId/{traderId}`
- * `GET /dashboard/profile/traderId/{traderId}`
+ + `GET /dashboard/portfolio/traderId/{traderId}`
+   * Get list of Stock along with its Stock Market information and information 
+	 about how much of this Stock the trader owns.
+ + `GET /dashboard/profile/traderId/{traderId}`
+   * Get Trader and Account information corresponding to traderId input.
 
 ## Docker Deployment
 
