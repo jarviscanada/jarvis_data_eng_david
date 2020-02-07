@@ -33,7 +33,9 @@ communicate with the trading application, build docker image for both
 Postgres and the trading application. Create a container instance for 
 both Postgres and the trading application then run both containers.
 
-Following screenshots walks through example tests:<br />
+Following screenshots walks through example tests<br />
+Once application is running, test by visint Swagger UI webpage:<br />
+`http://localhost:8080/swagger-ui.html#/`
 Firstly through TraderAccountController I create a new trader
 ![screenShot01](./assets/springbootPic01.JPG)
 Output displays that this operation is successful
@@ -136,6 +138,7 @@ Swagger allows you to describe the structure of your APIs so that machines
 
 ## Docker Deployment
 ![dockerize](./assets/dockerize.svg)
+<br />
 PSQL initializes table by copying ddl sql script into initialization directory: 
 `/docker-entrypoint-initdb.d`. When we start the container with `docker run`, database: 
 jrvstrading` is created via -e docker run flag. The ddl.sql script in entrypoint 
