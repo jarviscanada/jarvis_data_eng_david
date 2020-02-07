@@ -35,7 +35,7 @@ both Postgres and the trading application then run both containers.
 
 Following screenshots walks through example tests<br />
 Once application is running, test by visint Swagger UI webpage:<br />
-`http://localhost:8080/swagger-ui.html#/`
+`http://localhost:8080/swagger-ui.html#/`<br />
 Firstly through TraderAccountController I create a new trader
 ![screenShot01](./assets/springbootPic01.JPG)
 Output displays that this operation is successful
