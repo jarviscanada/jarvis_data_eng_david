@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-//@Api(value = "quote", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Controller
 @RequestMapping("/quote")
 public class QuoteController {
@@ -32,6 +31,8 @@ public class QuoteController {
 
   /**
    * Update market data
+   * @return List of Quotes
+   * @throws Exception throw with relation to HTTP status code
    */
   @PutMapping(path= "/iexMarketData")
   @ResponseStatus(HttpStatus.OK)
@@ -47,6 +48,9 @@ public class QuoteController {
   /**
    * Update a given quote in the quote table
    *  - Manually update a quote in the quote table using IEX market data
+   * @param quote
+   * @return Quote
+   * @throws Exception throw with relation to HTTP status code
    */
   @PutMapping(path= "/")
   @ResponseStatus(HttpStatus.OK)
@@ -62,6 +66,9 @@ public class QuoteController {
   /**
    * Add a new ticker to the dailyList (quote table)
    * - Add a new ticker/symbol to the quote table, so trader can trade this security
+   * @param tickerId
+   * @return Quote
+   * @throws Exception throw with relation to HTTP status code
    */
   @PostMapping(path= "/tickerId/{tickerId}")
   @ResponseStatus(HttpStatus.CREATED)
@@ -77,6 +84,8 @@ public class QuoteController {
   /**
    * Show the dailyList
    *  - Shows dailyList for this trading system
+   * @return List of Quotes
+   * @throws Exception throw with relation to HTTP status code
    */
   @GetMapping(path= "/dailyList")
   @ResponseStatus(HttpStatus.OK)
