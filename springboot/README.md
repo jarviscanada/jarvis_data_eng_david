@@ -58,6 +58,7 @@ Allow trader to submit a marketOrder<br />
 3) QuoteController<br />
 Get list of stocks available to trader. Use this also to add stocks or update stock information.<br />
 4) TraderAccountController<br />
+
 Allows Trader to create/delete an account. Trader can also withdraw/deposit money through this.<br />
 Controllers handle user requests inputted through API Endpoints.
 Mapping of each Endpoint API is defined here. Within each controller 
@@ -74,6 +75,7 @@ Executes buyer and seller market order, and validate whether the order is valid.
 Checks if stock is available. Also adds/update stocks.<br />
 4) TraderAccountService<br />
 Check if conditions to create/delete trader is valid. Also check if transaction made to Trader Account is possible.<br />
+
 Service layer will typically parse inputs from Controller layer, and 
 throw IllegalArgumentExceptions if bad inputs are sent. Otherwise will 
 perform business logic on data returned from DAO layer.
