@@ -13,7 +13,6 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.conn.HttpClientConnectionManager;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,7 +56,6 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
       HttpGet httpGet = new HttpGet(URI.create(url));
       httpResponse = getHttpClient().execute(httpGet);
     } catch (IOException e) {
-      logger.error("GET request execution failed: " + e);
       throw new DataRetrievalFailureException("HTTP GET request failed");
     }
     if (httpResponse == null) {
@@ -66,14 +64,12 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
     //check if httpResonse is valid
     int statusCode = httpResponse.getStatusLine().getStatusCode();
     if (statusCode != 200) {
-      logger.error("HTTP GET Response has issue code: " + statusCode);
       throw new IllegalArgumentException("HTTP GET Response has issue code: " + statusCode);
     }
 
     try {
       response = EntityUtils.toString(httpResponse.getEntity());
     } catch (IOException e) {
-      logger.error("Error converting HttpResponse to String");
       throw new IllegalArgumentException(
           "Conversion from HttpResponse to String failed: " + e);
     }
@@ -134,7 +130,6 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
       jsonList = JsonUtil
           .parseBatchJson(JsonUtil.generateJsonObject(json), IexQuote.class, "quote");
     } catch (IOException e) {
-      logger.info("Error converting Json Object to Json String: " + e);
       throw new IllegalArgumentException("One of arguments has been entered incorrectly");
     }
     if (jsonList.size() != tickerNum) {

@@ -16,10 +16,8 @@ public class ResponseExceptionUtil {
    */
   public static ResponseStatusException getResponseStatusException(Exception ex) {
     if (ex instanceof IllegalArgumentException) {
-      logger.debug("Invalid input", ex);
       return new ResponseStatusException(HttpStatus.BAD_REQUEST, ex.getMessage()); //status code 400
     } else {
-      logger.error("Internal Error", ex);
       return new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
           "Internal Error: Please contact Admin"); //status code 500
     }
