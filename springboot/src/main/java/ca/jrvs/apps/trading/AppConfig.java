@@ -18,14 +18,10 @@ public class AppConfig {
 
   @Bean
   public DataSource dataSource() {
-    String url = System.getenv("PSQL_URL");
-    String user = System.getenv("PSQL_USER");
-    String password = System.getenv("PSQL_PASSWORD");
-    //Never log your credentials/secrets. Use debugger instead
     BasicDataSource basicDataSource = new BasicDataSource();
-    basicDataSource.setUrl(url);
-    basicDataSource.setUsername(user);
-    basicDataSource.setPassword(password);
+    basicDataSource.setUrl(System.getenv("PSQL_URL"));
+    basicDataSource.setUsername(System.getenv("PSQL_USER"));
+    basicDataSource.setPassword(System.getenv("PSQL_PASSWORD"));
     return basicDataSource;
   }
 
