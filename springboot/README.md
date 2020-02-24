@@ -52,9 +52,13 @@ a non-created Trader to display difference from above
 ### Control Layer:
 Consists of:<br />
 1) DashboardController<br />
+Gives summary of trader PortfolioView & traderAccount<br />
 2) OrderController<br />
+Allow trader to submit a marketOrder<br />
 3) QuoteController<br />
+Get list of stocks available to trader. Use this also to add stocks or update stock information.<br />
 4) TraderAccountController<br />
+Allows Trader to create/delete an account. Trader can also withdraw/deposit money through this.<br />
 Controllers handle user requests inputted through API Endpoints.
 Mapping of each Endpoint API is defined here. Within each controller 
 method, typically executes Service layer - if fails will check for 
@@ -63,9 +67,13 @@ what type of exception to throw.
 ### Service Layer
 Consists of:<br />
 1) DashboardService<br />
+IllegalArgument check when finding Trader Accounts. Also searches and summarize all securities made by a Trader.<br />
 2) OrderService<br />
+Executes buyer and seller market order, and validate whether the order is valid.<br />
 3) QuoteService<br />
+Checks if stock is available. Also adds/update stocks.<br />
 4) TraderAccountService<br />
+Check if conditions to create/delete trader is valid. Also check if transaction made to Trader Account is possible.<br />
 Service layer will typically parse inputs from Controller layer, and 
 throw IllegalArgumentExceptions if bad inputs are sent. Otherwise will 
 perform business logic on data returned from DAO layer.
@@ -73,12 +81,20 @@ perform business logic on data returned from DAO layer.
 ### DAO layer
 Consists of:<br />
 1) AccountDao<br />
+Can find/delete/update/create Accounts either by Trader ID or Account ID. Information updated to Accounts table in database.<br />
 2) JdbcCrudDao<br />
+Abstract class that performs generic find/delete/update transactions for other DAO classes.<br />
 3) MarketDataDao<br />
+Is responsible for getting stocks from IEX via REST API.<br />
 4) PositionDao<br />
+Summary of quantities of securities owned according to Account ID. Reads from Position view in database.<br />
 5) QuoteDao<br />
+Can find/delete/update/create stocks available in local stock exchange. Data is updated via Quotes table in database.<br />
 6) SecurityOrderDao<br />
+Can find/delete/update/create security orders made according to Account ID. Data updated via SecurityOrder table in database.<br />
 7) TraderDao<br />
+Can find/delete/update/create Traders according to Trader ID. Data updated via Trader table in database.<br />
+
 Communicates directly with Postgres database with DataSource Object (Using JDBC 
 to connect). MarketDataDao communicates via REST API to IEX Cloud; other DAO's 
 are used to perform CRUD operations on Postgres database.
