@@ -104,6 +104,7 @@ can be executed to Hadoop.
 
 
 ## Hive Project
+For this project, we will be using Zeppelin to store and execute Hive queries, as seen below. Please read the image from bottom up. 
 ![hadoopCapture](./assets/hadoop_screenshot.JPG)
 
 ## Improvements
