@@ -109,7 +109,7 @@ For this project, we will be using Zeppelin to store and execute Hive queries, a
 
 ## Improvements
 1) Explore how bucketing may improve query performance
-2) Size of data worked on was 1.8GB which is not much. May be better to work on larger datasets in future.
+2) Size of data worked on was 1.8GB zipped, (2.27GB unzipped) which is not much. May be better to work on larger datasets in future.
 3) Add a component to further explore the differences the sorting and aggregating Hive functions:
 	- ORDER BY<br />
 	- DISTRIBUTED BY<br />
