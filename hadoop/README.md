@@ -4,7 +4,7 @@
 * [Introduction](#introduction)
 * [Hadoop Cluster](#hadoop-cluster)
 * [Hive Project](#hive-project)
-* [Improvements](#rest-api-usage)
+* [Improvements](#improvements)
 
 ## Introduction
 Purpose of this project is to learn and understand how to use Hadoop and it's components to process Big Data, of which the core components to 
@@ -21,7 +21,7 @@ Bash job on the Master Node, learned to use openSerde for better parsing, tested
 efficiency of using Columnar File Optimization and tested the performance improvement by executing queries via spark compared to Tez.
 
 ## Hadoop Cluster
-![diagram](./assets/diagram.jpg)
+![diagram](./assets/diagram.svg)
 ### Hardware Requirements
 1 Master Node with 12 GB memory, and machine type 2vCPUs
 	- Primary disk size is 100GB, and is standard persistent disk
