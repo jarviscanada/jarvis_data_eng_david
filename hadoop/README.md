@@ -104,8 +104,7 @@ can be executed to Hadoop.
 
 
 ## Hive Project
-
-
+![hadoopCapture](./assets/hadoop_capture.png)
 
 ## Improvements
 1) Explore how bucketing may improve query performance
