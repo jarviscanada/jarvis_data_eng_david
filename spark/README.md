@@ -20,9 +20,9 @@ Cluster Worker Processes here will respond with resource information.<br />
 **Spark Driver:** Controls execution of Spark Applications and maintains the 
 state and tasks of the Executors. Works with Cluster Manager to get information about 
 physical resources, and then uses this to launch Executors.<br />
-SparkSession is entry to underlying Spark functionality and allows programming Spark with DataFrame/SQL, and 
+`SparkSession` is entry to underlying Spark functionality and allows programming Spark with DataFrame/SQL, and 
 is a tool to perform computation across a Spark cluster.<br />
-A SparkContext is the entry point for low-level API functionality, and can be used to create RDD's. Is accessed via 
+A `SparkContext` is the entry point for low-level API functionality, and can be used to create RDD's. Is accessed via 
 SparkSession.<br />
 **Spark Executors:** The processes that performs the tasks requiured to complete the 
 Spark Application run. After running task, will report back to Spark Driver about results 
