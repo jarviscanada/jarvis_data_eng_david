@@ -10,20 +10,20 @@ apply them to solve problems.
 
 ## Spark Architecture
 ### Architecture Components 
-**Browser/Web UI:** Tool used to access Zeppelin Notebook to access RDD/DataFrame code/SQL</ br>
-**Zeppelin NoteBook:** Provides a Scala/shell environment to execute code</ br>
+**Browser/Web UI:** Tool used to access Zeppelin Notebook to access RDD/DataFrame code/SQL<br />
+**Zeppelin NoteBook:** Provides a Scala/shell environment to execute code<br />
 **Cluster Manager**: Is used to maintain the cluster of machines that will run 
 Spark Applications. Is split between Cluster Manager Driver in Master 
 Node (Same as YARN RM) and Cluster Worker Processes that exist in the Worker Nodes. 
 The Cluster Manager Driver prompts worker nodes for resources available, and the 
-Cluster Worker Processes here will respond with resource information.</ br>
+Cluster Worker Processes here will respond with resource information.<br />
 **Spark Driver:** Controls execution of Spark Applications and maintains the 
 state and tasks of the Executors. Works with Cluster Manager to get information about 
-physical resources, and then uses this to launch Executors.</ br>
+physical resources, and then uses this to launch Executors.<br />
 SparkSession is entry to underlying Spark functionality and allows programming Spark with DataFrame/SQL, and 
-is a tool to perform computation across a Spark cluster.</ br>
+is a tool to perform computation across a Spark cluster.<br />
 A SparkContext is the entry point for low-level API functionality, and can be used to create RDD's. Is accessed via 
-SparkSession.</ br>
+SparkSession.<br />
 **Spark Executors:** The processes that performs the tasks requiured to complete the 
 Spark Application run. After running task, will report back to Spark Driver about results 
 whether failed or successful etc.
@@ -45,13 +45,13 @@ worksheet seen below:
 
 ## Spark Structured API Project
 Spark Structured API is a newer high-level component of Spark, and is composed of 
-DataFrames, DataSets and SparkSQL.</ br>
+DataFrames, DataSets and SparkSQL.<br />
 **DataFrame:** Represent table of data with rows & columns - a collection of objects with type `Row`. It 
 is equivalent to a SQL table, but is distributedly stored, which is good for stored more/performing 
-faster computation on.</ br>
+faster computation on.<br />
 **DataSet:** DataSet API allows user to assign a Scala class to records within a DataFrame for manipulation. 
 This assignment will be type-safe, so object can only be viewed of the given type. DataSet is a well-defined DataFrame
-**SparkSQL:** SQL Queries</ br>
+**SparkSQL:** SQL Queries<br />
 Overall Structured API's are prefereed since they have the benefits of Spark SQL's optimized execution engine and
 is easier/more straightforward to use as a higher-level API compared to low-level RDD.
 
