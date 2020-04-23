@@ -50,7 +50,7 @@ DataFrames, DataSets and SparkSQL.<br />
 is equivalent to a SQL table, but is distributedly stored, which is good for stored more/performing 
 faster computation on.<br />
 **DataSet:** DataSet API allows user to assign a Scala class to records within a DataFrame for manipulation. 
-This assignment will be type-safe, so object can only be viewed of the given type. DataSet is a well-defined DataFrame
+This assignment will be type-safe, so object can only be viewed of the given type. DataSet is a well-defined DataFrame<br />
 **SparkSQL:** SQL Queries<br />
 Overall Structured API's are prefereed since they have the benefits of Spark SQL's optimized execution engine and
 is easier/more straightforward to use as a higher-level API compared to low-level RDD.
